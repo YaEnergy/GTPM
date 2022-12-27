@@ -231,7 +231,7 @@ namespace GameTexturePackManager
 
             if(index == mainWindow.selectedGameComboBox.Items.Count - 1)
             {
-                OpenAddGameForm();
+                CreateAddGameForm();
                 return;
             }
 
@@ -287,10 +287,11 @@ namespace GameTexturePackManager
             return filesDone;
         }
 
-        private void OpenAddGameForm()
+        private void CreateAddGameForm()
         {
             RefreshSelectedGameDropdown();
 
+            addGameForm = new AddGameForm();
             addGameForm.Text = "Add Game";
             addGameForm.AddGameButton.Text = "Add Game";
             addGameForm.GameNameTextBox.Enabled = true;
@@ -300,23 +301,61 @@ namespace GameTexturePackManager
             for (int i = 0; i < addGameForm.AllowedFileExtensionsCheckList.Items.Count; i++)
                 addGameForm.AllowedFileExtensionsCheckList.SetItemChecked(i, AddGameForm.AUTO_CHECKED_EXT.Contains((string)addGameForm.AllowedFileExtensionsCheckList.Items[i]));
 
-            addGameForm.ShowDialog(); //Showing as dialog means that the user can not interact with the main window, which might break the application.
+            OpenGameForm();
         }
 
-        private void OpenConfigureGameForm(CustomGame toConfigureGame)
+        private void CreateConfigureGameForm(CustomGame toConfigureGame)
         {
             RefreshSelectedGameDropdown();
 
+            addGameForm = new AddGameForm();
             addGameForm.Text = "Configure Game";
             addGameForm.AddGameButton.Text = $"Configure {toConfigureGame.Name}";
-            addGameForm.GameNameTextBox.Enabled = false;
             addGameForm.GameNameTextBox.Text = toConfigureGame.Name;
+            addGameForm.GameNameTextBox.Enabled = false;
             addGameForm.ContentFolderPathTextBox.Text = toConfigureGame.FolderPath;
 
             string[] fileTypesAllowed = DataFileSystem.GetFileTypesWithFileExtensions(toConfigureGame.AllowedExtensions);
             for (int i = 0; i < addGameForm.AllowedFileExtensionsCheckList.Items.Count; i++)
                 addGameForm.AllowedFileExtensionsCheckList.SetItemChecked(i, fileTypesAllowed.Contains((string)addGameForm.AllowedFileExtensionsCheckList.Items[i]));
-            
+
+            OpenGameForm();
+        }
+
+        private void OpenGameForm()
+        {
+            addGameForm.Icon = mainWindow.Icon;
+
+            addGameForm.AddGameButton.Click += (object? s, EventArgs e)
+                => AddGameButton();
+
+            string[] presetGameFilePaths = Directory.GetFiles(@"GTPMAssets\Presets");
+            List<CustomGame> foundPresetGames = new();
+            foreach (string presetGameFilePath in presetGameFilePaths)
+            {
+                CustomGame presetGame = CustomGame.GetGameFromTXTDataFile(new FileInfo(presetGameFilePath));
+                if (Directory.Exists(presetGame.FolderPath))
+                    foundPresetGames.Add(presetGame);
+            }
+
+            if (foundPresetGames.Count > 0)
+            {
+                for (int i = 0; i < foundPresetGames.Count; i++)
+                    addGameForm.GameNameTextBox.Items.Add(foundPresetGames[i].Name);
+
+                addGameForm.GameNameTextBox.SelectionChangeCommitted += (sender, args) =>
+                {
+                    CustomGame game = foundPresetGames[addGameForm.GameNameTextBox.SelectedIndex];
+                    addGameForm.ContentFolderPathTextBox.Text = game.FolderPath;
+
+                    string[] fileTypesAllowed = DataFileSystem.GetFileTypesWithFileExtensions(game.AllowedExtensions);
+                    for (int i = 0; i < addGameForm.AllowedFileExtensionsCheckList.Items.Count; i++)
+                        addGameForm.AllowedFileExtensionsCheckList.SetItemChecked(i, fileTypesAllowed.Contains((string)addGameForm.AllowedFileExtensionsCheckList.Items[i]));
+                };
+            }
+            else
+                addGameForm.GameNameTextBox.Items.Add("No games auto-detected");
+
             addGameForm.ShowDialog(); //Showing as dialog means that the user can not interact with the main window, which might break the application.
         }
         private BackgroundWorker? ApplySelectedTexturePacksToGame(CustomGame game)
@@ -350,8 +389,7 @@ namespace GameTexturePackManager
             progressBarForm.Show();
             mainWindow.AddOwnedForm(progressBarForm);
 
-            Icon? windowIcon = Icon.ExtractAssociatedIcon(GTPM_INFO["IconPath"]);
-            progressBarForm.Icon = windowIcon;
+            progressBarForm.Icon = mainWindow.Icon;
 
             progressBarForm.BackgroundWorker.DoWork += (object? s, DoWorkEventArgs args)
                 => ApplyTexturePacksToGameTask(s, args, game, texturePacks.ToArray(), DataFileSystem.GetTotalFilesInDirectory(new DirectoryInfo(GAMES_FOLDER_PATH + @$"\{game.Name}\TexturePacks\Default")));
@@ -446,37 +484,6 @@ namespace GameTexturePackManager
 
             Icon? windowIcon = Icon.ExtractAssociatedIcon(GTPM_INFO["IconPath"]);
             mainWindow.Icon = windowIcon;
-            addGameForm.Icon = windowIcon;
-
-            addGameForm.AddGameButton.Click += (object? s, EventArgs e)
-                => AddGameButton();
-
-            string[] presetGameFilePaths = Directory.GetFiles(@"GTPMAssets\Presets");
-            List<CustomGame> foundPresetGames = new();
-            foreach (string presetGameFilePath in presetGameFilePaths)
-            {
-                CustomGame presetGame = CustomGame.GetGameFromTXTDataFile(new FileInfo(presetGameFilePath));
-                if (Directory.Exists(presetGame.FolderPath))
-                    foundPresetGames.Add(presetGame);
-            }
-
-            if (foundPresetGames.Count > 0)
-            {
-                for (int i = 0; i < foundPresetGames.Count; i++)
-                    addGameForm.GameNameTextBox.Items.Add(foundPresetGames[i].Name);
-
-                addGameForm.GameNameTextBox.SelectionChangeCommitted += (sender, args) =>
-                {
-                    CustomGame game = foundPresetGames[addGameForm.GameNameTextBox.SelectedIndex];
-                    addGameForm.ContentFolderPathTextBox.Text = game.FolderPath;
-
-                    string[] fileTypesAllowed = DataFileSystem.GetFileTypesWithFileExtensions(game.AllowedExtensions);
-                    for (int i = 0; i < addGameForm.AllowedFileExtensionsCheckList.Items.Count; i++)
-                        addGameForm.AllowedFileExtensionsCheckList.SetItemChecked(i, fileTypesAllowed.Contains((string)addGameForm.AllowedFileExtensionsCheckList.Items[i]));
-                };
-            }
-            else
-                addGameForm.GameNameTextBox.Items.Add("No games auto-detected");
 
             RefreshSelectedGameDropdown();
             mainWindow.RefreshTexturePacksButton.Click += (object? s, EventArgs args) 
@@ -521,7 +528,7 @@ namespace GameTexturePackManager
             mainWindow.ConfigureGameButton.Click += (object? s, EventArgs args) =>
             {
                 if (selectedGame != null)
-                    OpenConfigureGameForm(selectedGame);
+                    CreateConfigureGameForm(selectedGame);
             };
 
             SelectGame(0);
