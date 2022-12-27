@@ -138,12 +138,6 @@ namespace GameTexturePackManager
             
             return progressBarForm.BackgroundWorker;
         }
-
-        private Exception? ConfigureCustomGame(CustomGame game)
-        {
-            //Configure
-            return null;
-        }
         private Exception? AddCustomGame(CustomGame game)
         {
             if (!Directory.Exists(game.FolderPath))
