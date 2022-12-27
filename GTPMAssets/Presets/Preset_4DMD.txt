@@ -1,0 +1,8 @@
+﻿GameName
+4D Miner Demo
+FolderPath
+C:\Program Files (x86)\Steam\steamapps\common\4D Miner Demo\assets
+IconPath
+Assets\PresetGameIcons\4DM32x.png
+AllowedExtensions
+.png:.jpg:.gif:.tiff:.jpeg:.svg:.tif:.heic:.bmp:.ogg:.wav:.mp3:.m4a:.mid:.m3u:.flac:.aif:.plist:.fnt:.otf:.ttf:.woff:.woff2:.obj:.3dm:.dae:.fbx:.max

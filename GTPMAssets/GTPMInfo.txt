@@ -1,0 +1,4 @@
+﻿Version
+v0.3.0
+IconPath
+GTPMAssets\Assets\Mis\placeholdericon.ico
