@@ -9,6 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="GTPMAssets\Assets\Mis\appIcon.ico" />
     <None Remove="GTPMAssets\Assets\Mis\placeholdericon.ico" />
     <None Remove="GTPMAssets\Assets\PresetGameIcons\4DM32x.png" />
     <None Remove="GTPMAssets\Assets\PresetGameIcons\GD32x.png" />
@@ -23,6 +24,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="GTPMAssets\Assets\Mis\appIcon.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="GTPMAssets\Assets\Mis\placeholdericon.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

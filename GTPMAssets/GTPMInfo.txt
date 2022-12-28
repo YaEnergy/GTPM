@@ -1,4 +1,4 @@
 ﻿Version
-v0.3.0
+v1.0.0
 IconPath
-GTPMAssets\Assets\Mis\placeholdericon.ico
+GTPMAssets\Assets\Mis\appIcon.ico
