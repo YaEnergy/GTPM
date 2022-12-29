@@ -405,15 +405,9 @@ namespace GameTexturePackManager
                 progressBarForm.Close();
 
                 if (args.Error != null)
-                {
                     MessageBox.Show($"An exception occurred while applying texture packs for {game.Name}. Error Message: {args.Error.Message}", "Apply Texture Packs", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    //Ask to reapply default texture pack
-                }
                 else if (args.Cancelled)
-                {
                     MessageBox.Show($"Texture Pack Apply has been cancelled.", "Apply Texture Packs", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                    //Ask to reapply default texture pack
-                }
                 else
                     MessageBox.Show($"Applied texture packs to {game.Name}!", "Apply Texture Packs");
 
