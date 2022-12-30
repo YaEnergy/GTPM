@@ -370,7 +370,7 @@ namespace GameTexturePackManager
 
             addGameForm.ShowDialog(); //Showing as dialog means that the user can not interact with the main window, which might break the application.
         }
-        private BackgroundWorker? ApplySelectedTexturePacksToGame(CustomGame game)
+        private BackgroundWorker? ApplySelectedTexturePacksToGame(CustomGame game, bool askQuestion = true)
         {
             List<string> texturePacks = new();
             long bytesRequired = 0;
@@ -387,9 +387,12 @@ namespace GameTexturePackManager
                 return null;
             }
 
-            DialogResult result = MessageBox.Show($"Are you sure you want to apply the selected texture packs?", "Apply Texture Packs", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
-            if (result != DialogResult.OK)
-                return null;
+            if(askQuestion)
+            {
+                DialogResult result = MessageBox.Show($"Are you sure you want to apply the selected texture packs?", "Apply Texture Packs", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                if (result != DialogResult.OK)
+                    return null;
+            }
 
             if (!Directory.Exists(game.FolderPath))
                 return null;
@@ -423,11 +426,17 @@ namespace GameTexturePackManager
                 else
                     MessageBox.Show($"Applied texture packs to {game.Name}!", "Apply Texture Packs", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                //ask to apply default if error/cancel
 
                 SetEnabledStateAllGameButtons(true);
-                RefreshSelectedGameDropdown();
+                RefreshSelectedGameDropdown(); //Only selected texture pack will be Default
                 mainWindow.selectedGameComboBox.Enabled = true;
+
+                if (args.Error != null || args.Cancelled)
+                {
+                    DialogResult result = MessageBox.Show("Would you like to apply the default texture pack only?", "Apply Texture Packs", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if(result == DialogResult.Yes)
+                        ApplySelectedTexturePacksToGame(game, false);
+                }
             };
             progressBarForm.BackgroundWorker.RunWorkerAsync();
 
