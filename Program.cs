@@ -88,7 +88,7 @@ namespace GameTexturePackManager
         }
         private BackgroundWorker? CreateDefaultTexturePack(CustomGame game)
         {
-            DialogResult result = MessageBox.Show($"GTPM has to create a default texture pack for {game.Name}. If you have any texture packs already on, you might want to take them off before letting GTPM create a default texture pack. This will require {DataFileSystem.GetDirectoryByteSize(new DirectoryInfo(game.FolderPath)) / 1024 / 1024} MB.", "Default Texture Pack", MessageBoxButtons.OKCancel, MessageBoxIcon.Exclamation);
+            DialogResult result = MessageBox.Show($"GTPM has to create a default texture pack for {game.Name}. If you have any texture packs already on, you might want to take them off before letting GTPM create a default texture pack. This will require {DataFileSystem.GetDirectoryByteSize(new DirectoryInfo(game.FolderPath)) / 1024 / 1024} MB.", "Default Texture Pack", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
             if (result != DialogResult.OK)
                 return null;
 
@@ -124,11 +124,11 @@ namespace GameTexturePackManager
                 }
                 else if (args.Cancelled)
                 {
-                    MessageBox.Show($"Texture Pack creation has been cancelled. The texture pack has been removed.", "Default Texture Pack", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show($"Texture Pack creation has been cancelled. The texture pack has been removed.", "Default Texture Pack", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     Directory.Delete(defaultTPPath, true);
                 }
                 else
-                    MessageBox.Show($"Created a default texture pack for {game.Name}!", "Default Texture Pack");
+                    MessageBox.Show($"Created a default texture pack for {game.Name}!", "Default Texture Pack", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 SetEnabledStateAllGameButtons(true);
                 RefreshSelectedGameDropdown();
@@ -254,8 +254,20 @@ namespace GameTexturePackManager
             DirectoryInfo gameFolder = new DirectoryInfo(game.FolderPath + subFolder);
             FileInfo[] files = gameFolder.GetFiles();
 
+            if (worker.CancellationPending)
+            {
+                args.Cancel = true;
+                return filesDone;
+            }
+
             foreach (FileInfo file in files)
             {
+                if (worker.CancellationPending)
+                {
+                    args.Cancel = true;
+                    return filesDone;
+                }
+
                 if (!game.AllowedExtensions.Contains(file.Extension))
                     continue;
 
@@ -407,9 +419,11 @@ namespace GameTexturePackManager
                 if (args.Error != null)
                     MessageBox.Show($"An exception occurred while applying texture packs for {game.Name}. Error Message: {args.Error.Message}", "Apply Texture Packs", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 else if (args.Cancelled)
-                    MessageBox.Show($"Texture Pack Apply has been cancelled.", "Apply Texture Packs", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    MessageBox.Show($"Texture Pack Apply has been cancelled.", "Apply Texture Packs", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 else
-                    MessageBox.Show($"Applied texture packs to {game.Name}!", "Apply Texture Packs");
+                    MessageBox.Show($"Applied texture packs to {game.Name}!", "Apply Texture Packs", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                //ask to apply default if error/cancel
 
                 SetEnabledStateAllGameButtons(true);
                 RefreshSelectedGameDropdown();
@@ -446,7 +460,7 @@ namespace GameTexturePackManager
                 return;
             }
 
-            DialogResult dialogResult = MessageBox.Show($"Are you sure that you want to add/configure {addGameForm.GameNameTextBox.Text} as a custom game?", "Add/Configure Custom Game", MessageBoxButtons.YesNo);
+            DialogResult dialogResult = MessageBox.Show($"Are you sure that you want to add/configure {addGameForm.GameNameTextBox.Text} as a custom game?", "Add/Configure Custom Game", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (dialogResult != DialogResult.Yes)
                 return;
 
