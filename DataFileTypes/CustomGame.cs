@@ -22,7 +22,6 @@ namespace GameTexturePackManager
             CustomGame game = new CustomGame();
             Dictionary<string, string> data = DataFileSystem.GetDataFromTXTDataFile(file);
             game.Name = data.ContainsKey("GameName") ? data["GameName"] : "null";
-            game.IconPath = data.ContainsKey("IconPath") ? data["IconPath"] : "null";
             game.FolderPath = data.ContainsKey("FolderPath") ? data["FolderPath"] : "null";
             
 
@@ -41,7 +40,6 @@ namespace GameTexturePackManager
             Dictionary<string, string> data = new();
             data.Add("GameName", Name);
             data.Add("FolderPath", FolderPath);
-            data.Add("IconPath", IconPath);
 
             string allowedExtensionsString = "";
             for (int i = 0; i < AllowedExtensions.Count; i++)

@@ -2,7 +2,5 @@
 Spooky's Jumpscare Mansion
 FolderPath
 C:\Program Files (x86)\Steam\steamapps\common\Spooky's House of Jump Scares\DATA
-IconPath
-Assets\PresetGameIcons\SJM32x.png
 AllowedExtensions
 .png:.jpg:.gif:.tiff:.jpeg:.svg:.tif:.heic:.bmp:.ogg:.wav:.mp3:.m4a:.mid:.m3u:.flac:.aif:.plist:.fnt:.otf:.ttf:.woff:.woff2:.obj:.3dm:.dae:.fbx:.max

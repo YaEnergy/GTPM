@@ -1,4 +1,4 @@
 ﻿Version
 v1.0.0
 IconPath
-GTPMAssets\Assets\Mis\appIcon.ico
+GTPMAssets\Assets\appIcon.ico

@@ -9,37 +9,19 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="GTPMAssets\Assets\Mis\appIcon.ico" />
-    <None Remove="GTPMAssets\Assets\Mis\placeholdericon.ico" />
-    <None Remove="GTPMAssets\Assets\PresetGameIcons\4DM32x.png" />
-    <None Remove="GTPMAssets\Assets\PresetGameIcons\GD32x.png" />
-    <None Remove="GTPMAssets\Assets\PresetGameIcons\SJM32x.png" />
-    <None Remove="GTPMAssets\Assets\PresetGameIcons\SJMLong32x12.png" />
-    <None Remove="GTPMAssets\Assets\PresetGameIcons\terraria32x32.png" />
     <None Remove="GTPMAssets\FileExtensions.txt" />
     <None Remove="GTPMAssets\GTPMInfo.txt" />
     <None Remove="GTPMAssets\Presets\Preset_4DMD.txt" />
     <None Remove="GTPMAssets\Presets\Preset_GD.txt" />
     <None Remove="GTPMAssets\Presets\Preset_SJM.txt" />
+    <None Remove="README.md" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="GTPMAssets\Assets\Mis\appIcon.ico">
+    <Content Include="GTPMAssets\Assets\appIcon.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="GTPMAssets\Assets\Mis\placeholdericon.ico">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="GTPMAssets\Assets\PresetGameIcons\GD32x.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="GTPMAssets\Assets\PresetGameIcons\SJM32x.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="GTPMAssets\Assets\PresetGameIcons\SJMLong32x12.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="GTPMAssets\Assets\PresetGameIcons\terraria32x32.png">
+    <Content Include="GTPMAssets\Assets\placeholdericon.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="GTPMAssets\FileExtensions.txt">
@@ -60,7 +42,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="GTPMAssets\Assets\PresetGameIcons\4DM32x.png">
+    <Content Include="README.md">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
