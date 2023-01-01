@@ -48,7 +48,7 @@ These texture packs should contain the base files (textures, audio, ...) of the 
 
 If a selected game does not have a default texture pack, it will ask to create one, but if you decline, you won't be able to apply texture packs.
 
-##Notes
+## Notes
 
 > PLEASE make sure your default texture packs are up-to-date. You can update a default texture pack by pressing the 'Reset Default Texture Pack' button.
 
