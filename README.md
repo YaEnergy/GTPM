@@ -23,7 +23,7 @@ In the 'Allowed File Extensions' checklist, you can select which file types (lik
 
 To add the game to the list, just press the 'Add Game' button. GTPM will ask you if you want to let it create a default texture pack, this is required if you want to manage texture packs.
 
-![Add Game Window](https://raw.githubusercontent.com/YaEnergy/GDTS/master/GTPMAssets/Assets/Github/AddGame.gif)
+![Add Game Window](https://raw.githubusercontent.com/YaEnergy/GTPM/master/GTPMAssets/Assets/Github/AddGame.gif)
 
 ### Applying Texture Packs
 
@@ -39,7 +39,7 @@ To remove a texture pack from the selected list, just double click on the textur
 To apply the selected texture packs, just press the 'Apply Texture Packs' button.
 > Make sure your default texture pack is up-to-date. You can update your default texture pack by pressing the 'Reset Default Texture Pack' button.
 
-![Applying Texture Packs](https://raw.githubusercontent.com/YaEnergy/GDTS/master/GTPMAssets/Assets/Github/ApplyRemoveTexturePacksAndSelectGame.gif)
+![Applying Texture Packs](https://raw.githubusercontent.com/YaEnergy/GTPM/master/GTPMAssets/Assets/Github/ApplyRemoveTexturePacksAndSelectGame.gif)
 
 ### Default Texture Packs
 
