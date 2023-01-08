@@ -1,0 +1,78 @@
+﻿ApplicationName
+Game Texture Pack Manager
+MainWindow_SelectedGameLabel
+Selected Game
+MainWindow_ConfigureGameButton
+Configure Game
+MainWindow_AvailableTexturePacksLabel
+Available Texture Packs
+MainWindow_SelectedTexturePacksLabel
+Selected Texture Packs
+MainWindow_ApplyTexturePacksButton
+Apply Texture Packs
+MainWindow_RefreshTexturePacksButton
+Refresh Texture Packs
+MainWindow_OpenTexturePacksFolderButton
+Open Texture Packs Folder
+MainWindow_ResetDefaultTexturePackButton
+RESET DEFAULT TEXTURE PACK
+AddGameForm_GameNameLabel
+Game Name
+AddGameForm_ContentFolderPathLabel
+Content Folder Path
+AddGameForm_SelectFolderButton
+Select Folder
+AddGameForm_AllowedFileTypesLabel
+Allowed File Types
+AddGameForm_ConfigureGameButton
+Configure {0}
+AddGame
+Add Game
+NoGameSelected
+No Game Selected
+NoPresetGamesFound
+No games auto-detected
+AddGameQuestion
+Are you sure that you want to add/configure {0} as a custom game?
+InvalidGameName
+The Game Name cannot contain invalid file name characters.
+CustomGameCreationError
+Custom Game Creation Error
+GameDirectoryRemoved
+{0}\{1} has been removed.
+ContentFolderPathNotFound
+Content folder path doesn't exist! {0}
+OverwritingFilesProgress
+Overwriting {0}\n({1}%) ({2}/{3} files)
+CopyingFilesProgress
+Copying {0}\n({1}%) ({2}/{3} files)
+DefaultTexturePackException
+An exception occurred while creating a default texture pack for {0}. The texture pack has been removed. Error Message: {1}
+DefaultTexturePackQuestion
+GTPM has to create a default texture pack for {0}. If you have any texture packs already on, you might want to take them off before letting GTPM create a default texture pack. This will require {1} MB.
+DefaultTexturePack
+Default Texture Pack
+DefaultTexturePackSuccess
+Created a default texture pack for {0}!
+DefaultTexturePackCancel
+Texture Pack creation has been cancelled. The texture pack has been removed.
+DefaultTexturePackNotEnoughSpaceError
+You must have {0} MB available on your computer to add this custom game.
+CreateDefaultTexturePack
+Create Default Texture Pack
+ApplyTexturePackNotEnoughSpaceError
+You do not have enough available free space to apply these texture packs. ({0} MB)
+TextureNotFoundException
+Texture {0} not found in any texture pack (including default)!
+ApplyTexturePackQuestion
+Are you sure you want to apply the selected texture packs?
+ApplyTexturePacks
+Apply Texture Packs
+ApplySuccess
+Applied texture packs to {0}!
+ApplyCancel
+Texture Pack Apply has been cancelled.
+ApplyException
+An exception occurred while applying texture packs for {°}. Error Message: {1}
+ApplyDefaultQuestion
+Would you like to apply the default texture pack only?

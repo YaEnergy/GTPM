@@ -25,6 +25,8 @@ namespace GameTexturePackManager
 
             GTPM_INFO = DataFileSystem.GetDataFromTXTDataFile(new FileInfo(@"GTPMAssets\GTPMInfo.txt"));
             EXTENSION_TYPES = DataFileSystem.GetDataFromTXTDataFile(new FileInfo(@"GTPMAssets\FileExtensions.txt"));
+            LanguageSystem.SetDefaultLanguage("English");
+            //Get user language
 
             if (!Directory.Exists(GAMES_FOLDER_PATH))
                 Directory.CreateDirectory(GAMES_FOLDER_PATH);
