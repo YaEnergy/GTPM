@@ -33,7 +33,7 @@ No Game Selected
 NoPresetGamesFound
 No games auto-detected
 AddGameQuestion
-Are you sure that you want to add/configure {0} as a custom game?
+Are you sure that you want to add/configure {0}?
 InvalidGameName
 The Game Name cannot contain invalid file name characters.
 CustomGameCreationError
@@ -73,6 +73,6 @@ Applied texture packs to {0}!
 ApplyCancel
 Texture Pack Apply has been cancelled.
 ApplyException
-An exception occurred while applying texture packs for {°}. Error Message: {1}
+An exception occurred while applying texture packs for {0}. Error Message: {1}
 ApplyDefaultQuestion
 Would you like to apply the default texture pack only?

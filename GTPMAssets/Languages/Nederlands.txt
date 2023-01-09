@@ -1,0 +1,79 @@
+﻿ApplicationName
+Game Texture Pack Manager
+MainWindow_SelectedGameLabel
+Geselecteerde spel
+MainWindow_ConfigureGameButton
+Configureer spel
+MainWindow_AvailableTexturePacksLabel
+Beschikbare textuurpakketten
+MainWindow_SelectedTexturePacksLabel
+Geselecteerde textuurpakketten
+MainWindow_ApplyTexturePacksButton
+Breng textuurpakketten aan spel
+MainWindow_RefreshTexturePacksButton
+Vernieuw textuurpakketten
+MainWindow_OpenTexturePacksFolderButton
+Open textuurpakketten map
+MainWindow_ResetDefaultTexturePackButton
+RESET STANDAARD TEXTUURPAKKET
+AddGameForm_GameNameLabel
+Spel naam
+AddGameForm_ContentFolderPathLabel
+Inhoud map pad
+AddGameForm_SelectFolderButton
+Kies map
+AddGameForm_AllowedFileTypesLabel
+Toegestaan file soorten
+AddGameForm_ConfigureGameButton
+Configureer {0}
+AddGame
+Voeg spel toe
+NoGameSelected
+Geen spel geselecteerd
+NoPresetGamesFound
+Geen spellen automatisch gevonden
+AddGameQuestion
+Ben je zeker dat je {0} wil toevoegen/configureren?
+InvalidGameName
+De spel naam mag niet niet-toegestaan karakters bevatten.
+CustomGameCreationError
+Spel Creatie Fout
+GameDirectoryRemoved
+{0}\{1} werd verwijderd.
+ContentFolderPathNotFound
+Inhoud map pad bestaat niet! {0}
+OverwritingFilesProgress
+{0} aan het overschrijven\n({1}%) ({2}/{3} files)
+CopyingFilesProgress
+{0} aan het kopiëren\n({1}%) ({2}/{3} files)
+DefaultTexturePackException
+Er is een fout gebeurd tijdens het maken van een standaard textuurpakket voor {0}. De textuurpakket werd verwijderd. Fout bericht: {1}
+DefaultTexturePackQuestion
+GTPM moet een standaard textuurpakket maken for {0}. Als u textuurpakketten al aan heb, is het best dat u ze uit doet voordat u GTPM dit laat doen. Dit zal {0} MB nodig hebben.
+DefaultTexturePack
+Standaard textuurpakket
+DefaultTexturePackSuccess
+Standaard textuurpakket gemaakt voor {0}!
+DefaultTexturePackCancel
+Textuurpakket creatie gecancelleerd. De textuurpakket werd verwijderd.
+DefaultTexturePackNotEnoughSpaceError
+U heeft {0} MB nodig om deze spel toe te voegen.
+CreateDefaultTexturePack
+Maak standaard textuurpakket
+ApplyTexturePackNotEnoughSpaceError
+U heeft niet genoeg vrije plaats over om deze textuurpakketten aan te brengen ({0} MB)
+TextureNotFoundException
+Uw geselecteerde textuurpakketten bevatten allemaal niet textuur {0}! (Inclusief standaard)
+ApplyTexturePackQuestion
+Ben je zeker dat je deze geselecteerde textuurpakketten wilt aanbrengen?
+ApplyTexturePacks
+Textuurpakketten aanbrengen
+ApplySuccess
+Textuurpakketten gebracht aan {0}!
+Applied texture packs to {0}!
+ApplyCancel
+Textuurpakketten aanbrengen is gecancelleerd.
+ApplyException
+Er is een fout gebeurd tijdens het brengen van de textuurpakketten aan {0}. Fout bericht: {1}
+ApplyDefaultQuestion
+Wilt u alleen de standaard textuurpakket aanbrengen?
