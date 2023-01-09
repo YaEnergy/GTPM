@@ -25,7 +25,8 @@ namespace GameTexturePackManager
 
             GTPM_INFO = DataFileSystem.GetDataFromTXTDataFile(new FileInfo(@"GTPMAssets\GTPMInfo.txt"));
             EXTENSION_TYPES = DataFileSystem.GetDataFromTXTDataFile(new FileInfo(@"GTPMAssets\FileExtensions.txt"));
-            LanguageSystem.SetDefaultLanguage("English");
+            SettingsSystem.SetDefaultLanguage("English");
+            SettingsSystem.SetLanguage("English");
             //Get user language
 
             if (!Directory.Exists(GAMES_FOLDER_PATH))
@@ -500,6 +501,7 @@ namespace GameTexturePackManager
         public async Task MainAsync()
         {
             mainWindow.Text = $"Game Texture Pack Manager ({GTPM_INFO["Version"]})";
+            mainWindow.ApplyLanguage(SettingsSystem.SelectedLanguage);
 
             Icon? windowIcon = Icon.ExtractAssociatedIcon(GTPM_INFO["IconPath"]);
             mainWindow.Icon = windowIcon;

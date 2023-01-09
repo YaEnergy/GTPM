@@ -11,6 +11,8 @@
   <ItemGroup>
     <None Remove="GTPMAssets\FileExtensions.txt" />
     <None Remove="GTPMAssets\GTPMInfo.txt" />
+    <None Remove="GTPMAssets\Languages\English.txt" />
+    <None Remove="GTPMAssets\Languages\Nederlands.txt" />
     <None Remove="GTPMAssets\Presets\Preset_4DMD.txt" />
     <None Remove="GTPMAssets\Presets\Preset_GD.txt" />
     <None Remove="GTPMAssets\Presets\Preset_SJM.txt" />
@@ -28,6 +30,12 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="GTPMAssets\GTPMInfo.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="GTPMAssets\Languages\English.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="GTPMAssets\Languages\Nederlands.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="GTPMAssets\Presets\Preset_4DMD.txt">

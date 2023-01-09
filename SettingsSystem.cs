@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GameTexturePackManager
 {
-    public static class LanguageSystem
+    public static class SettingsSystem
     {
         private static readonly string LanguageFolderPath = @"GTPMAssets\Languages\";
 
@@ -34,6 +34,14 @@ namespace GameTexturePackManager
         {
             DefaultLanguageName = languageName;
             DefaultLanguage = DataFileSystem.GetDataFromTXTDataFile(new FileInfo(LanguageFolderPath + languageName + ".txt"));
+        }
+
+        public static Dictionary<string, string> GetSettingsDictionary()
+        {
+            Dictionary<string, string> settings = new Dictionary<string, string>();
+            settings.Add("SelectedLanguage", SelectedLanguageName);
+
+            return settings;
         }
     }
 }
