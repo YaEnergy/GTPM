@@ -16,6 +16,17 @@ namespace GameTexturePackManager
         public static string DefaultLanguageName = "-";
         public static Dictionary<string, string> DefaultLanguage = new();
 
+        public static string[] GetLanguageNames()
+        {
+            List<string> languageNames = new List<string>();
+            FileInfo[] languageFiles = new DirectoryInfo(LanguageFolderPath).GetFiles();
+
+            foreach (FileInfo languageFile in languageFiles)
+                languageNames.Add(languageFile.Name);
+
+            return languageNames.ToArray();
+        }
+
         public static Dictionary<string, string> GetLanguageDictionary(string languageName)
         {
             if (!File.Exists(LanguageFolderPath + languageName + ".txt"))

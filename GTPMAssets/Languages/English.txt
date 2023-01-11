@@ -76,3 +76,9 @@ ApplyException
 An exception occurred while applying texture packs for {0}. Error Message: {1}
 ApplyDefaultQuestion
 Would you like to apply the default texture pack only?
+Settings_Name
+Settings
+Settings_Language
+Language
+Settings_Apply
+Apply Settings

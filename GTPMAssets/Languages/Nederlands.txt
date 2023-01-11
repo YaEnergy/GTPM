@@ -77,3 +77,9 @@ ApplyException
 Er is een fout gebeurd tijdens het brengen van de textuurpakketten aan {0}. Fout bericht: {1}
 ApplyDefaultQuestion
 Wilt u alleen de standaard textuurpakket aanbrengen?
+Settings_Name
+Instellingen
+Settings_Language
+Taal
+Settings_Apply
+Bewaar instellingen
