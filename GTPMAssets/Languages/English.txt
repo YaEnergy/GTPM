@@ -81,4 +81,8 @@ Settings
 Settings_Language
 Language
 Settings_Apply
-Apply Settings
+Save Settings
+Settings_OpenButton
+Open GTPM Settings
+Settings_AskToSave
+You haven't saved yet. Would you like to save your settings?

@@ -172,6 +172,33 @@ namespace GameTexturePackManager
             return null;
         }
 
+        private void SelectGame(int index)
+        {
+            string gameName = (string)mainWindow.selectedGameComboBox.SelectedItem;
+            bool isGameIndex = index != 0 && index != mainWindow.selectedGameComboBox.Items.Count - 1 && File.Exists(GAMES_FOLDER_PATH + $@"\{gameName}\gtmADATA.txt");
+
+            SetEnabledStateAllGameButtons(isGameIndex);
+
+            if (!isGameIndex)
+                selectedGame = null;
+            else
+                selectedGame = CustomGame.GetGameFromTXTDataFile(new FileInfo(GAMES_FOLDER_PATH + $@"\{gameName}\gtmADATA.txt"));
+
+            RefreshTexturePacksList();
+
+            if (index == mainWindow.selectedGameComboBox.Items.Count - 1)
+            {
+                CreateAddGameForm();
+                return;
+            }
+
+            if (!Directory.Exists(GAMES_FOLDER_PATH + $@"\{gameName}\TexturePacks\Default") && isGameIndex && selectedGame != null)
+            {
+                SetEnabledStateAllGameButtons(false);
+                CreateDefaultTexturePack(selectedGame);
+            }
+        }
+
         private void SelectTexturePack(object? sender, DragEventArgs args)
         {
             if (sender == null)
@@ -217,32 +244,6 @@ namespace GameTexturePackManager
                     return;
 
             listbox.Items.RemoveAt(selectedIndex);
-        }
-        private void SelectGame(int index)
-        {
-            string gameName = (string)mainWindow.selectedGameComboBox.SelectedItem;
-            bool isGameIndex = index != 0 && index != mainWindow.selectedGameComboBox.Items.Count - 1 && File.Exists(GAMES_FOLDER_PATH + $@"\{gameName}\gtmADATA.txt");
-
-            SetEnabledStateAllGameButtons(isGameIndex);
-
-            if (!isGameIndex)
-                selectedGame = null;
-            else
-                selectedGame = CustomGame.GetGameFromTXTDataFile(new FileInfo(GAMES_FOLDER_PATH + $@"\{gameName}\gtmADATA.txt"));
-
-            RefreshTexturePacksList();
-
-            if(index == mainWindow.selectedGameComboBox.Items.Count - 1)
-            {
-                CreateAddGameForm();
-                return;
-            }
-
-            if (!Directory.Exists(GAMES_FOLDER_PATH + $@"\{gameName}\TexturePacks\Default") && isGameIndex && selectedGame != null)
-            {
-                SetEnabledStateAllGameButtons(false);
-                CreateDefaultTexturePack(selectedGame);
-            }
         }
 
         private int ApplyTexturePacksToGameTask(object? s, DoWorkEventArgs args, CustomGame game, string[] texturePacks, int totalFiles, int filesDone = 0, string subFolder = "")
@@ -339,10 +340,51 @@ namespace GameTexturePackManager
 
         private void OpenGameForm()
         {
+            void OnClickAddGameButton()
+            {
+                if (addGameForm.GameNameTextBox.Text == "" || addGameForm.ContentFolderPathTextBox.Text == "")
+                    return;
+
+                if (addGameForm.GameNameTextBox.Text.IndexOfAny(Path.GetInvalidFileNameChars()) != -1)
+                {
+                    string invalidPathCharsString = "";
+                    foreach (char c in Path.GetInvalidFileNameChars())
+                        invalidPathCharsString += c;
+
+                    MessageBox.Show($"The Game Name cannot contain invalid file name characters.");
+                    return;
+                }
+
+                DialogResult dialogResult = MessageBox.Show($"Are you sure that you want to add/configure {addGameForm.GameNameTextBox.Text} as a custom game?", "Add/Configure Custom Game", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (dialogResult != DialogResult.Yes)
+                    return;
+
+                CustomGame game = new CustomGame();
+                game.Name = addGameForm.GameNameTextBox.Text;
+                game.FolderPath = addGameForm.ContentFolderPathTextBox.Text;
+                game.IconPath = "";
+                foreach (string key in addGameForm.AllowedFileExtensionsCheckList.CheckedItems)
+                    foreach (string extension in EXTENSION_TYPES[key].Split(':'))
+                        game.AllowedExtensions.Add(extension.ToLower());
+
+                addGameForm.Close();
+                Exception? ex = AddCustomGame(game);
+                if (ex != null)
+                {
+                    MessageBox.Show(ex.Message, "Custom Game Creation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    string path = GAMES_FOLDER_PATH + $@"\{game.Name}";
+                    if (Directory.Exists(path) && Directory.GetDirectories(path).Length == 0 && Directory.GetFiles(path).Length == 0)
+                    {
+                        Directory.Delete(path);
+                        MessageBox.Show(@$"{GAMES_FOLDER_PATH}\{game.Name} has been removed.", "Custom Game Creation Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+            }
+
             addGameForm.Icon = mainWindow.Icon;
 
             addGameForm.AddGameButton.Click += (object? s, EventArgs e)
-                => AddGameButton();
+                => OnClickAddGameButton();
 
             string[] presetGameFilePaths = Directory.GetFiles(@"GTPMAssets\Presets");
             List<CustomGame> foundPresetGames = new();
@@ -457,47 +499,6 @@ namespace GameTexturePackManager
             mainWindow.ConfigureGameButton.Enabled = enabled;
         }
 
-        private void AddGameButton()
-        {
-            if (addGameForm.GameNameTextBox.Text == "" || addGameForm.ContentFolderPathTextBox.Text == "")
-                return;
-
-            if (addGameForm.GameNameTextBox.Text.IndexOfAny(Path.GetInvalidFileNameChars()) != -1)
-            {
-                string invalidPathCharsString = "";
-                foreach (char c in Path.GetInvalidFileNameChars())
-                    invalidPathCharsString += c;
-
-                MessageBox.Show($"The Game Name cannot contain invalid file name characters.");
-                return;
-            }
-
-            DialogResult dialogResult = MessageBox.Show($"Are you sure that you want to add/configure {addGameForm.GameNameTextBox.Text} as a custom game?", "Add/Configure Custom Game", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (dialogResult != DialogResult.Yes)
-                return;
-
-            CustomGame game = new CustomGame();
-            game.Name = addGameForm.GameNameTextBox.Text;
-            game.FolderPath = addGameForm.ContentFolderPathTextBox.Text;
-            game.IconPath = "";
-            foreach (string key in addGameForm.AllowedFileExtensionsCheckList.CheckedItems)
-                foreach (string extension in EXTENSION_TYPES[key].Split(':'))
-                    game.AllowedExtensions.Add(extension.ToLower());
-
-            addGameForm.Close();
-            Exception? ex = AddCustomGame(game);
-            if (ex != null)
-            {
-                MessageBox.Show(ex.Message, "Custom Game Creation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                string path = GAMES_FOLDER_PATH + $@"\{game.Name}";
-                if (Directory.Exists(path) && Directory.GetDirectories(path).Length == 0 && Directory.GetFiles(path).Length == 0)
-                {
-                    Directory.Delete(path);
-                    MessageBox.Show(@$"{GAMES_FOLDER_PATH}\{game.Name} has been removed.", "Custom Game Creation Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-            }
-        }
-
         public async Task MainAsync()
         {
             mainWindow.Text = $"Game Texture Pack Manager ({GTPM_INFO["Version"]})";
@@ -551,6 +552,9 @@ namespace GameTexturePackManager
                 if (selectedGame != null)
                     CreateConfigureGameForm(selectedGame);
             };
+
+            mainWindow.OpenSettingsButton.Click += (object? s, EventArgs args)
+                => SettingsForm.CreateSettingsDialog().ShowDialog();
 
             SelectGame(0);
 

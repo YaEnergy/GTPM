@@ -37,5 +37,34 @@ namespace GameTexturePackManager
             if(dialog.ShowDialog() == DialogResult.OK)
                 ContentFolderPathTextBox.Text = dialog.SelectedPath;
         }
+
+        public void ApplyLanguage(Dictionary<string, string> languageDict)
+        {
+            gameNameLabel.Text = "";
+            contentFolderPathLabel.Text = "";
+            fileExtensionsChecklistLabel.Text = "";
+            AddGameButton.Text = "";
+        }
+
+        private static AddGameForm CreateBaseAddGameForm()
+        {
+            AddGameForm addGameForm = new();
+
+            return addGameForm;
+        }
+
+        public static AddGameForm CreateAddGameForm()
+        {
+            AddGameForm addGameForm = CreateBaseAddGameForm();
+
+            return addGameForm;
+        }
+
+        public static AddGameForm CreateConfigureGameForm()
+        {
+            AddGameForm addGameForm = CreateBaseAddGameForm();
+
+            return addGameForm;
+        }
     }
 }

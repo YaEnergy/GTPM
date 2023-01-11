@@ -39,6 +39,7 @@
             this.ConfigureGameButton = new System.Windows.Forms.Button();
             this.RefreshTexturePacksButton = new System.Windows.Forms.Button();
             this.ResetDefaultTexturePackButton = new System.Windows.Forms.Button();
+            this.OpenSettingsButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // selectedGameLabel
@@ -150,11 +151,21 @@
             this.ResetDefaultTexturePackButton.Text = "RESET DEFAULT TEXTURE PACK";
             this.ResetDefaultTexturePackButton.UseVisualStyleBackColor = true;
             // 
+            // OpenSettingsButton
+            // 
+            this.OpenSettingsButton.Location = new System.Drawing.Point(161, 296);
+            this.OpenSettingsButton.Name = "OpenSettingsButton";
+            this.OpenSettingsButton.Size = new System.Drawing.Size(266, 35);
+            this.OpenSettingsButton.TabIndex = 11;
+            this.OpenSettingsButton.Text = "Open GTPM Settings";
+            this.OpenSettingsButton.UseVisualStyleBackColor = true;
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(582, 303);
+            this.ClientSize = new System.Drawing.Size(582, 343);
+            this.Controls.Add(this.OpenSettingsButton);
             this.Controls.Add(this.ResetDefaultTexturePackButton);
             this.Controls.Add(this.RefreshTexturePacksButton);
             this.Controls.Add(this.ConfigureGameButton);
@@ -166,8 +177,8 @@
             this.Controls.Add(this.availableTPLabel);
             this.Controls.Add(this.selectedGameComboBox);
             this.Controls.Add(this.selectedGameLabel);
-            this.MaximumSize = new System.Drawing.Size(600, 350);
-            this.MinimumSize = new System.Drawing.Size(600, 350);
+            this.MaximumSize = new System.Drawing.Size(600, 390);
+            this.MinimumSize = new System.Drawing.Size(600, 390);
             this.Name = "MainWindow";
             this.Text = "Game Texture Pack Manager (v{Version})";
             this.ResumeLayout(false);
@@ -188,5 +199,6 @@
         public Button ConfigureGameButton;
         public Button RefreshTexturePacksButton;
         public Button ResetDefaultTexturePackButton;
+        public Button OpenSettingsButton;
     }
 }

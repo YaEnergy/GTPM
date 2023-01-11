@@ -83,3 +83,7 @@ Settings_Language
 Taal
 Settings_Apply
 Bewaar instellingen
+Settings_OpenButton
+Open GTPM Instellingen
+Settings_AskToSave
+U heeft nog niet bewaard. Zou u graag uw instellingen bewaren?
