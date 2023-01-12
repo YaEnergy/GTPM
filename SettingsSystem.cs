@@ -8,6 +8,7 @@ namespace GameTexturePackManager
 {
     public static class SettingsSystem
     {
+        public static readonly string SettingsFilePath = @"GTPMAssets\GTPMSettings.txt";
         private static readonly string LanguageFolderPath = @"GTPMAssets\Languages\";
 
         public static string SelectedLanguageName = "-";
@@ -22,7 +23,7 @@ namespace GameTexturePackManager
             FileInfo[] languageFiles = new DirectoryInfo(LanguageFolderPath).GetFiles();
 
             foreach (FileInfo languageFile in languageFiles)
-                languageNames.Add(languageFile.Name);
+                languageNames.Add(languageFile.Name.Replace(languageFile.Extension, ""));
 
             return languageNames.ToArray();
         }

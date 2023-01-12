@@ -26,11 +26,17 @@ namespace GameTexturePackManager
             GTPM_INFO = DataFileSystem.GetDataFromTXTDataFile(new FileInfo(@"GTPMAssets\GTPMInfo.txt"));
             EXTENSION_TYPES = DataFileSystem.GetDataFromTXTDataFile(new FileInfo(@"GTPMAssets\FileExtensions.txt"));
             SettingsSystem.SetDefaultLanguage("English");
-            SettingsSystem.SetLanguage("English");
-            //Get user language
 
             if (!Directory.Exists(GAMES_FOLDER_PATH))
                 Directory.CreateDirectory(GAMES_FOLDER_PATH);
+
+            if (!File.Exists(SettingsSystem.SettingsFilePath))
+            {
+                //Set default user settings
+                SettingsSystem.SetLanguage("English"); //Find correct language (if exists) with cultureinfo
+
+                DataFileSystem.WriteDataToTXTDataFile(SettingsSystem.SettingsFilePath, SettingsSystem.GetSettingsDictionary());
+            }
 
             new Program().MainAsync().GetAwaiter().GetResult();
         }
@@ -553,8 +559,12 @@ namespace GameTexturePackManager
                     CreateConfigureGameForm(selectedGame);
             };
 
-            mainWindow.OpenSettingsButton.Click += (object? s, EventArgs args)
-                => SettingsForm.CreateSettingsDialog().ShowDialog();
+            mainWindow.OpenSettingsButton.Click += (object? s, EventArgs args) =>
+            {
+                SettingsForm settingsForm = SettingsForm.CreateSettingsDialog();
+                settingsForm.Icon = mainWindow.Icon;
+                settingsForm.ShowDialog();
+            };
 
             SelectGame(0);
 

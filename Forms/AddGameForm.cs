@@ -57,12 +57,16 @@ namespace GameTexturePackManager
         {
             AddGameForm addGameForm = CreateBaseAddGameForm();
 
+            //WIP
+
             return addGameForm;
         }
 
         public static AddGameForm CreateConfigureGameForm()
         {
             AddGameForm addGameForm = CreateBaseAddGameForm();
+
+            //WIP
 
             return addGameForm;
         }

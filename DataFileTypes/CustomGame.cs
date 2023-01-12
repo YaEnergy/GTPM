@@ -13,6 +13,8 @@ namespace GameTexturePackManager
         public string FolderPath { get; set; } = "";
         public List<string> AllowedExtensions { get; set; } = new();
 
+        public bool CheckIfUpToDateOnApply = true;
+
         /// <summary>
         /// Returns a CustomGame Object from a TXTDataFile that represents a Preset or Custom game
         /// </summary>
@@ -23,9 +25,9 @@ namespace GameTexturePackManager
             Dictionary<string, string> data = DataFileSystem.GetDataFromTXTDataFile(file);
             game.Name = data.ContainsKey("GameName") ? data["GameName"] : "null";
             game.FolderPath = data.ContainsKey("FolderPath") ? data["FolderPath"] : "null";
-            
+            game.CheckIfUpToDateOnApply = data.ContainsKey("CheckIfUpToDateOnApply") ? bool.Parse(data["CheckIfUpToDateOnApply"]) : true;
 
-            if(data.ContainsKey("AllowedExtensions"))
+            if (data.ContainsKey("AllowedExtensions"))
             {
                 string[] allowedExtensions = data["AllowedExtensions"].Split(':');
                 foreach(string extension in allowedExtensions)
@@ -40,6 +42,7 @@ namespace GameTexturePackManager
             Dictionary<string, string> data = new();
             data.Add("GameName", Name);
             data.Add("FolderPath", FolderPath);
+            data.Add("CheckIfUpToDateOnApply", CheckIfUpToDateOnApply.ToString());
 
             string allowedExtensionsString = "";
             for (int i = 0; i < AllowedExtensions.Count; i++)

@@ -56,6 +56,12 @@ namespace GameTexturePackManager
 
             settingsForm.ApplyButton.Click += (object? s, EventArgs args) => SaveSettings();
 
+            string[] languageNames = SettingsSystem.GetLanguageNames();
+            foreach (string languageName in languageNames)
+                settingsForm.LanguageComboBox.Items.Add(languageName);
+
+
+
             //Display current settings and setting options
 
             return settingsForm;
