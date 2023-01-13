@@ -17,11 +17,11 @@ namespace GameTexturePackManager
             InitializeComponent();
         }
 
-        public void ApplyLanguage(Dictionary<string, string> languageDict)
+        public void ApplyLanguage()
         {
-            Text = languageDict.ContainsKey("Settings_Name") ? languageDict["Settings_Name"] : SettingsSystem.DefaultLanguage["Settings_Name"];
-            ApplyButton.Text = languageDict.ContainsKey("Settings_Apply") ? languageDict["Settings_Apply"] : SettingsSystem.DefaultLanguage["Settings_Apply"];
-            languageLabel.Text = languageDict.ContainsKey("Settings_Language") ? languageDict["Settings_Language"] : SettingsSystem.DefaultLanguage["Settings_Language"];
+            Text = SettingsSystem.GetStringInLanguage("Settings_Name");
+            ApplyButton.Text = SettingsSystem.GetStringInLanguage("Settings_Apply");
+            languageLabel.Text = SettingsSystem.GetStringInLanguage("Settings_Language");
         }
 
         public static SettingsForm CreateSettingsDialog()
@@ -29,7 +29,7 @@ namespace GameTexturePackManager
             bool hasSettingsChanged = false;
 
             SettingsForm settingsForm = new();
-            settingsForm.ApplyLanguage(SettingsSystem.SelectedLanguage);
+            settingsForm.ApplyLanguage();
 
             void SaveSettings()
             {

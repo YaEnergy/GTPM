@@ -194,7 +194,15 @@ namespace GameTexturePackManager
 
             if (index == mainWindow.selectedGameComboBox.Items.Count - 1)
             {
-                CreateAddGameForm();
+                RefreshSelectedGameDropdown();
+
+                AddGameForm addGameForm = AddGameForm.CreateAddGameForm();
+                addGameForm.Icon = mainWindow.Icon;
+
+                addGameForm.AddGameButton.Click += (object? s, EventArgs args)
+                    => OnClickAddGameButton(addGameForm);
+
+                addGameForm.ShowDialog();
                 return;
             }
 
@@ -309,116 +317,44 @@ namespace GameTexturePackManager
             return filesDone;
         }
 
-        private void CreateAddGameForm()
+        private void OnClickAddGameButton(AddGameForm addGameForm)
         {
-            RefreshSelectedGameDropdown();
+            if (addGameForm.GameNameTextBox.Text == "" || addGameForm.ContentFolderPathTextBox.Text == "")
+                return;
 
-            addGameForm = new AddGameForm();
-            addGameForm.Text = "Add Game";
-            addGameForm.AddGameButton.Text = "Add Game";
-            addGameForm.GameNameTextBox.Enabled = true;
-            addGameForm.GameNameTextBox.Text = "";
-            addGameForm.ContentFolderPathTextBox.Text = "";
-
-            for (int i = 0; i < addGameForm.AllowedFileExtensionsCheckList.Items.Count; i++)
-                addGameForm.AllowedFileExtensionsCheckList.SetItemChecked(i, AddGameForm.AUTO_CHECKED_EXT.Contains((string)addGameForm.AllowedFileExtensionsCheckList.Items[i]));
-
-            OpenGameForm();
-        }
-
-        private void CreateConfigureGameForm(CustomGame toConfigureGame)
-        {
-            RefreshSelectedGameDropdown();
-
-            addGameForm = new AddGameForm();
-            addGameForm.Text = "Configure Game";
-            addGameForm.AddGameButton.Text = $"Configure {toConfigureGame.Name}";
-            addGameForm.GameNameTextBox.Text = toConfigureGame.Name;
-            addGameForm.GameNameTextBox.Enabled = false;
-            addGameForm.ContentFolderPathTextBox.Text = toConfigureGame.FolderPath;
-
-            string[] fileTypesAllowed = DataFileSystem.GetFileTypesWithFileExtensions(toConfigureGame.AllowedExtensions);
-            for (int i = 0; i < addGameForm.AllowedFileExtensionsCheckList.Items.Count; i++)
-                addGameForm.AllowedFileExtensionsCheckList.SetItemChecked(i, fileTypesAllowed.Contains((string)addGameForm.AllowedFileExtensionsCheckList.Items[i]));
-
-            OpenGameForm();
-        }
-
-        private void OpenGameForm()
-        {
-            void OnClickAddGameButton()
+            if (addGameForm.GameNameTextBox.Text.IndexOfAny(Path.GetInvalidFileNameChars()) != -1)
             {
-                if (addGameForm.GameNameTextBox.Text == "" || addGameForm.ContentFolderPathTextBox.Text == "")
-                    return;
+                string invalidPathCharsString = "";
+                foreach (char c in Path.GetInvalidFileNameChars())
+                    invalidPathCharsString += c;
 
-                if (addGameForm.GameNameTextBox.Text.IndexOfAny(Path.GetInvalidFileNameChars()) != -1)
+                MessageBox.Show($"The Game Name cannot contain invalid file name characters.");
+                return;
+            }
+
+            DialogResult dialogResult = MessageBox.Show($"Are you sure that you want to add/configure {addGameForm.GameNameTextBox.Text} as a custom game?", "Add/Configure Custom Game", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (dialogResult != DialogResult.Yes)
+                return;
+
+            CustomGame game = new CustomGame();
+            game.Name = addGameForm.GameNameTextBox.Text;
+            game.FolderPath = addGameForm.ContentFolderPathTextBox.Text;
+            foreach (string key in addGameForm.AllowedFileExtensionsCheckList.CheckedItems)
+                foreach (string extension in EXTENSION_TYPES[key].Split(':'))
+                    game.AllowedExtensions.Add(extension.ToLower());
+
+            addGameForm.Close();
+            Exception? ex = AddCustomGame(game);
+            if (ex != null)
+            {
+                MessageBox.Show(ex.Message, "Custom Game Creation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                string path = GAMES_FOLDER_PATH + $@"\{game.Name}";
+                if (Directory.Exists(path) && Directory.GetDirectories(path).Length == 0 && Directory.GetFiles(path).Length == 0)
                 {
-                    string invalidPathCharsString = "";
-                    foreach (char c in Path.GetInvalidFileNameChars())
-                        invalidPathCharsString += c;
-
-                    MessageBox.Show($"The Game Name cannot contain invalid file name characters.");
-                    return;
-                }
-
-                DialogResult dialogResult = MessageBox.Show($"Are you sure that you want to add/configure {addGameForm.GameNameTextBox.Text} as a custom game?", "Add/Configure Custom Game", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if (dialogResult != DialogResult.Yes)
-                    return;
-
-                CustomGame game = new CustomGame();
-                game.Name = addGameForm.GameNameTextBox.Text;
-                game.FolderPath = addGameForm.ContentFolderPathTextBox.Text;
-                foreach (string key in addGameForm.AllowedFileExtensionsCheckList.CheckedItems)
-                    foreach (string extension in EXTENSION_TYPES[key].Split(':'))
-                        game.AllowedExtensions.Add(extension.ToLower());
-
-                addGameForm.Close();
-                Exception? ex = AddCustomGame(game);
-                if (ex != null)
-                {
-                    MessageBox.Show(ex.Message, "Custom Game Creation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    string path = GAMES_FOLDER_PATH + $@"\{game.Name}";
-                    if (Directory.Exists(path) && Directory.GetDirectories(path).Length == 0 && Directory.GetFiles(path).Length == 0)
-                    {
-                        Directory.Delete(path);
-                        MessageBox.Show(@$"{GAMES_FOLDER_PATH}\{game.Name} has been removed.", "Custom Game Creation Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
+                    Directory.Delete(path);
+                    MessageBox.Show(@$"{GAMES_FOLDER_PATH}\{game.Name} has been removed.", "Custom Game Creation Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
-
-            addGameForm.Icon = mainWindow.Icon;
-
-            addGameForm.AddGameButton.Click += (object? s, EventArgs e)
-                => OnClickAddGameButton();
-
-            string[] presetGameFilePaths = Directory.GetFiles(@"GTPMAssets\Presets");
-            List<CustomGame> foundPresetGames = new();
-            foreach (string presetGameFilePath in presetGameFilePaths)
-            {
-                CustomGame presetGame = CustomGame.GetGameFromTXTDataFile(new FileInfo(presetGameFilePath));
-                if (Directory.Exists(presetGame.FolderPath))
-                    foundPresetGames.Add(presetGame);
-            }
-
-            if (foundPresetGames.Count > 0)
-            {
-                for (int i = 0; i < foundPresetGames.Count; i++)
-                    addGameForm.GameNameTextBox.Items.Add(foundPresetGames[i].Name);
-
-                addGameForm.GameNameTextBox.SelectionChangeCommitted += (sender, args) =>
-                {
-                    CustomGame game = foundPresetGames[addGameForm.GameNameTextBox.SelectedIndex];
-                    addGameForm.ContentFolderPathTextBox.Text = game.FolderPath;
-
-                    string[] fileTypesAllowed = DataFileSystem.GetFileTypesWithFileExtensions(game.AllowedExtensions);
-                    for (int i = 0; i < addGameForm.AllowedFileExtensionsCheckList.Items.Count; i++)
-                        addGameForm.AllowedFileExtensionsCheckList.SetItemChecked(i, fileTypesAllowed.Contains((string)addGameForm.AllowedFileExtensionsCheckList.Items[i]));
-                };
-            }
-            else
-                addGameForm.GameNameTextBox.Items.Add("No games auto-detected");
-
-            addGameForm.ShowDialog(); //Showing as dialog means that the user can not interact with the main window, which might break the application.
         }
         private BackgroundWorker? ApplySelectedTexturePacksToGame(CustomGame game, bool askQuestion = true)
         {
@@ -496,7 +432,7 @@ namespace GameTexturePackManager
         public async Task MainAsync()
         {
             mainWindow.Text = $"Game Texture Pack Manager ({GTPM_INFO["Version"]})";
-            mainWindow.ApplyLanguage(SettingsSystem.SelectedLanguage);
+            mainWindow.ApplyLanguage();
 
             Icon? windowIcon = Icon.ExtractAssociatedIcon(GTPM_INFO["IconPath"]);
             mainWindow.Icon = windowIcon;
@@ -543,8 +479,16 @@ namespace GameTexturePackManager
 
             mainWindow.ConfigureGameButton.Click += (object? s, EventArgs args) =>
             {
-                if (selectedGame != null)
-                    CreateConfigureGameForm(selectedGame);
+                if (selectedGame == null) 
+                    return;
+
+                AddGameForm addGameForm = AddGameForm.CreateConfigureGameForm(selectedGame);
+                addGameForm.Icon = mainWindow.Icon;
+
+                addGameForm.AddGameButton.Click += (object? s, EventArgs args)
+                    => OnClickAddGameButton(addGameForm);
+
+                addGameForm.ShowDialog();
             };
 
             mainWindow.OpenSettingsButton.Click += (object? s, EventArgs args) =>
