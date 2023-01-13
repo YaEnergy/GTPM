@@ -34,9 +34,19 @@ namespace GameTexturePackManager
             void SaveSettings()
             {
                 hasSettingsChanged = false;
-                settingsForm.ApplyButton.Enabled = !hasSettingsChanged;
-                //Save Settings
-                MessageBox.Show("Settings saved! TEST");
+                settingsForm.ApplyButton.Enabled = hasSettingsChanged;
+
+                string languageName = (string)settingsForm.LanguageComboBox.SelectedItem;
+                SettingsSystem.SetLanguage(languageName);
+
+                settingsForm.ApplyLanguage();
+                
+                Exception? ex = DataFileSystem.WriteDataToTXTDataFile(SettingsSystem.SettingsFilePath, SettingsSystem.GetSettingsDictionary());
+
+                if (ex != null) 
+                    throw ex;
+
+                MessageBox.Show("Settings saved! not in language files yet");
             }
 
             void OnSettingOptionChanged()
@@ -44,7 +54,7 @@ namespace GameTexturePackManager
                 if (hasSettingsChanged) return;
 
                 hasSettingsChanged = true;
-                settingsForm.ApplyButton.Enabled = !hasSettingsChanged;
+                settingsForm.ApplyButton.Enabled = hasSettingsChanged;
             }
 
             void OnClosing(object? s, FormClosingEventArgs args)
@@ -61,17 +71,20 @@ namespace GameTexturePackManager
                     SaveSettings();
             }
 
-            settingsForm.FormClosing += (object? s, FormClosingEventArgs args) => OnClosing(s, args);
+            settingsForm.FormClosing += (object? s, FormClosingEventArgs args) 
+                => OnClosing(s, args);
 
-            settingsForm.ApplyButton.Click += (object? s, EventArgs args) => SaveSettings();
+            settingsForm.ApplyButton.Click += (object? s, EventArgs args)
+                => SaveSettings();
+
+            settingsForm.LanguageComboBox.SelectionChangeCommitted += (object? s, EventArgs args)
+                => OnSettingOptionChanged();
 
             string[] languageNames = SettingsSystem.GetLanguageNames();
             foreach (string languageName in languageNames)
                 settingsForm.LanguageComboBox.Items.Add(languageName);
 
-
-
-            //Display current settings and setting options
+            settingsForm.LanguageComboBox.SelectedIndex = settingsForm.LanguageComboBox.FindString(SettingsSystem.SelectedLanguageName);
 
             return settingsForm;
         }

@@ -38,6 +38,10 @@ namespace GameTexturePackManager
                 DataFileSystem.WriteDataToTXTDataFile(SettingsSystem.SettingsFilePath, SettingsSystem.GetSettingsDictionary());
             }
 
+            Dictionary<string, string> settingsDict = DataFileSystem.GetDataFromTXTDataFile(new FileInfo(SettingsSystem.SettingsFilePath));
+
+            SettingsSystem.SetLanguage(settingsDict["SelectedLanguage"]);
+
             new Program().MainAsync().GetAwaiter().GetResult();
         }
 

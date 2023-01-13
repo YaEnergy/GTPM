@@ -70,7 +70,6 @@ ApplyTexturePacks
 Textuurpakketten aanbrengen
 ApplySuccess
 Textuurpakketten gebracht aan {0}!
-Applied texture packs to {0}!
 ApplyCancel
 Textuurpakketten aanbrengen is gecancelleerd.
 ApplyException
