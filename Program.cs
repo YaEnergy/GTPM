@@ -72,7 +72,7 @@ namespace GameTexturePackManager
             mainWindow.selectedGameComboBox.Items.Add("No game selected");
             mainWindow.selectedGameComboBox.SelectedIndex = 0;
             selectedGame = null;
-            SetEnabledStateAllGameButtons(false);
+            mainWindow.SetEnabledStateAllGameButtons(false);
 
             foreach (DirectoryInfo game in games)
                 mainWindow.selectedGameComboBox.Items.Add(game.Name);
@@ -104,7 +104,7 @@ namespace GameTexturePackManager
             if (!Directory.Exists(game.FolderPath))
                 return null;
 
-            SetEnabledStateAllGameButtons(false);
+            mainWindow.SetEnabledStateAllGameButtons(false);
             mainWindow.selectedGameComboBox.Enabled = false;
 
             ProgressBarForm progressBarForm = new ProgressBarForm("Create Default Texture Pack");
@@ -139,7 +139,7 @@ namespace GameTexturePackManager
                 else
                     MessageBox.Show($"Created a default texture pack for {game.Name}!", "Default Texture Pack", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                SetEnabledStateAllGameButtons(true);
+                mainWindow.SetEnabledStateAllGameButtons(true);
                 RefreshSelectedGameDropdown();
                 mainWindow.selectedGameComboBox.Enabled = true;
             };
@@ -183,7 +183,7 @@ namespace GameTexturePackManager
             string gameName = (string)mainWindow.selectedGameComboBox.SelectedItem;
             bool isGameIndex = index != 0 && index != mainWindow.selectedGameComboBox.Items.Count - 1 && File.Exists(GAMES_FOLDER_PATH + $@"\{gameName}\gtmADATA.txt");
 
-            SetEnabledStateAllGameButtons(isGameIndex);
+            mainWindow.SetEnabledStateAllGameButtons(isGameIndex);
 
             if (!isGameIndex)
                 selectedGame = null;
@@ -200,7 +200,7 @@ namespace GameTexturePackManager
 
             if (!Directory.Exists(GAMES_FOLDER_PATH + $@"\{gameName}\TexturePacks\Default") && isGameIndex && selectedGame != null)
             {
-                SetEnabledStateAllGameButtons(false);
+                mainWindow.SetEnabledStateAllGameButtons(false);
                 CreateDefaultTexturePack(selectedGame);
             }
         }
@@ -368,7 +368,6 @@ namespace GameTexturePackManager
                 CustomGame game = new CustomGame();
                 game.Name = addGameForm.GameNameTextBox.Text;
                 game.FolderPath = addGameForm.ContentFolderPathTextBox.Text;
-                game.IconPath = "";
                 foreach (string key in addGameForm.AllowedFileExtensionsCheckList.CheckedItems)
                     foreach (string extension in EXTENSION_TYPES[key].Split(':'))
                         game.AllowedExtensions.Add(extension.ToLower());
@@ -448,7 +447,7 @@ namespace GameTexturePackManager
             if (!Directory.Exists(game.FolderPath))
                 return null;
 
-            SetEnabledStateAllGameButtons(false);
+            mainWindow.SetEnabledStateAllGameButtons(false);
             mainWindow.selectedGameComboBox.Enabled = false;
 
             ProgressBarForm progressBarForm = new ProgressBarForm("Applying Texture Packs");
@@ -478,7 +477,7 @@ namespace GameTexturePackManager
                     MessageBox.Show($"Applied texture packs to {game.Name}!", "Apply Texture Packs", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
 
-                SetEnabledStateAllGameButtons(true);
+                mainWindow.SetEnabledStateAllGameButtons(true);
                 RefreshSelectedGameDropdown(); //Only selected texture pack will be Default
                 mainWindow.selectedGameComboBox.Enabled = true;
 
@@ -492,17 +491,6 @@ namespace GameTexturePackManager
             progressBarForm.BackgroundWorker.RunWorkerAsync();
 
             return progressBarForm.BackgroundWorker;
-        }
-
-        private void SetEnabledStateAllGameButtons(bool enabled)
-        {
-            mainWindow.SelectedTexturePacksList.Enabled = enabled;
-            mainWindow.AvailableTexturePacksList.Enabled = enabled;
-            mainWindow.ApplyTexturePacksButton.Enabled = enabled;
-            mainWindow.OpenTexturePacksFolderButton.Enabled = enabled;
-            mainWindow.RefreshTexturePacksButton.Enabled = enabled;
-            mainWindow.ResetDefaultTexturePackButton.Enabled = enabled;
-            mainWindow.ConfigureGameButton.Enabled = enabled;
         }
 
         public async Task MainAsync()

@@ -23,7 +23,7 @@ Inhoud map pad
 AddGameForm_SelectFolderButton
 Kies map
 AddGameForm_AllowedFileTypesLabel
-Toegestaan file soorten
+Toegestaan bestand soorten
 AddGameForm_ConfigureGameButton
 Configureer {0}
 AddGame

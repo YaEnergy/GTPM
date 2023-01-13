@@ -18,5 +18,16 @@ namespace GameTexturePackManager
             availableTPLabel.Text = languageDict.ContainsKey("MainWindow_AvailableTexturePacksLabel") ? languageDict["MainWindow_AvailableTexturePacksLabel"] : SettingsSystem.DefaultLanguage["MainWindow_AvailableTexturePacksLabel"];
             selectedGameLabel.Text = languageDict.ContainsKey("MainWindow_SelectedGameLabel") ? languageDict["MainWindow_SelectedGameLabel"] : SettingsSystem.DefaultLanguage["MainWindow_SelectedGameLabel"];
         }
+
+        public void SetEnabledStateAllGameButtons(bool enabled)
+        {
+            SelectedTexturePacksList.Enabled = enabled;
+            AvailableTexturePacksList.Enabled = enabled;
+            ApplyTexturePacksButton.Enabled = enabled;
+            OpenTexturePacksFolderButton.Enabled = enabled;
+            RefreshTexturePacksButton.Enabled = enabled;
+            ResetDefaultTexturePackButton.Enabled = enabled;
+            ConfigureGameButton.Enabled = enabled;
+        }
     }
 }

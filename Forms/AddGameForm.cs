@@ -40,15 +40,45 @@ namespace GameTexturePackManager
 
         public void ApplyLanguage(Dictionary<string, string> languageDict)
         {
-            gameNameLabel.Text = "";
-            contentFolderPathLabel.Text = "";
-            fileExtensionsChecklistLabel.Text = "";
-            AddGameButton.Text = "";
+            gameNameLabel.Text = languageDict.ContainsKey("AddGameForm_GameNameLabel") ? languageDict["AddGameForm_GameNameLabel"] : SettingsSystem.DefaultLanguage["AddGameForm_GameNameLabel"]; ;
+            contentFolderPathLabel.Text = languageDict.ContainsKey("AddGameForm_ContentFolderPathLabel") ? languageDict["AddGameForm_ContentFolderPathLabel"] : SettingsSystem.DefaultLanguage["AddGameForm_ContentFolderPathLabel"];
+            fileExtensionsChecklistLabel.Text = languageDict.ContainsKey("AddGameForm_AllowedFileTypesLabel") ? languageDict["AddGameForm_AllowedFileTypesLabel"] : SettingsSystem.DefaultLanguage["AddGameForm_AllowedFileTypesLabel"];
+            AddGameButton.Text = Text = languageDict.ContainsKey("AddGame") ? languageDict["AddGame"] : SettingsSystem.DefaultLanguage["AddGame"];
+            SelectFolderButton.Text = languageDict.ContainsKey("AddGameForm_SelectFolderButton") ? languageDict["AddGameForm_SelectFolderButton"] : SettingsSystem.DefaultLanguage["AddGameForm_SelectFolderButton"];
         }
 
         private static AddGameForm CreateBaseAddGameForm()
         {
             AddGameForm addGameForm = new();
+
+            addGameForm.ApplyLanguage(SettingsSystem.SelectedLanguage);
+
+            string[] presetGameFilePaths = Directory.GetFiles(@"GTPMAssets\Presets");
+            List<CustomGame> foundPresetGames = new();
+            foreach (string presetGameFilePath in presetGameFilePaths)
+            {
+                CustomGame presetGame = CustomGame.GetGameFromTXTDataFile(new FileInfo(presetGameFilePath));
+                if (Directory.Exists(presetGame.FolderPath))
+                    foundPresetGames.Add(presetGame);
+            }
+
+            if (foundPresetGames.Count > 0)
+            {
+                for (int i = 0; i < foundPresetGames.Count; i++)
+                    addGameForm.GameNameTextBox.Items.Add(foundPresetGames[i].Name);
+
+                addGameForm.GameNameTextBox.SelectionChangeCommitted += (sender, args) =>
+                {
+                    CustomGame game = foundPresetGames[addGameForm.GameNameTextBox.SelectedIndex];
+                    addGameForm.ContentFolderPathTextBox.Text = game.FolderPath;
+
+                    string[] fileTypesAllowed = DataFileSystem.GetFileTypesWithFileExtensions(game.AllowedExtensions);
+                    for (int i = 0; i < addGameForm.AllowedFileExtensionsCheckList.Items.Count; i++)
+                        addGameForm.AllowedFileExtensionsCheckList.SetItemChecked(i, fileTypesAllowed.Contains((string)addGameForm.AllowedFileExtensionsCheckList.Items[i]));
+                };
+            }
+            else
+                addGameForm.GameNameTextBox.Items.Add("No games auto-detected");
 
             return addGameForm;
         }
@@ -57,16 +87,31 @@ namespace GameTexturePackManager
         {
             AddGameForm addGameForm = CreateBaseAddGameForm();
 
-            //WIP
+            addGameForm.Text = SettingsSystem.SelectedLanguage.ContainsKey("AddGame") ? SettingsSystem.SelectedLanguage["AddGame"] : SettingsSystem.DefaultLanguage["AddGame"];
+            addGameForm.GameNameTextBox.Enabled = true;
+            addGameForm.GameNameTextBox.Text = "";
+            addGameForm.ContentFolderPathTextBox.Text = "";
+
+            for (int i = 0; i < addGameForm.AllowedFileExtensionsCheckList.Items.Count; i++)
+                addGameForm.AllowedFileExtensionsCheckList.SetItemChecked(i, AUTO_CHECKED_EXT.Contains((string)addGameForm.AllowedFileExtensionsCheckList.Items[i]));
 
             return addGameForm;
         }
 
-        public static AddGameForm CreateConfigureGameForm()
+        public static AddGameForm CreateConfigureGameForm(CustomGame toConfigureGame)
         {
             AddGameForm addGameForm = CreateBaseAddGameForm();
 
-            //WIP
+            string configureGameFormatString = SettingsSystem.SelectedLanguage.ContainsKey("AddGame") ? SettingsSystem.SelectedLanguage["AddGame"] : SettingsSystem.DefaultLanguage["AddGame"];
+            addGameForm.Text = string.Format(configureGameFormatString, "Game");
+            addGameForm.AddGameButton.Text = string.Format(configureGameFormatString, toConfigureGame.Name);
+            addGameForm.GameNameTextBox.Text = toConfigureGame.Name;
+            addGameForm.GameNameTextBox.Enabled = false;
+            addGameForm.ContentFolderPathTextBox.Text = toConfigureGame.FolderPath;
+
+            string[] fileTypesAllowed = DataFileSystem.GetFileTypesWithFileExtensions(toConfigureGame.AllowedExtensions);
+            for (int i = 0; i < addGameForm.AllowedFileExtensionsCheckList.Items.Count; i++)
+                addGameForm.AllowedFileExtensionsCheckList.SetItemChecked(i, fileTypesAllowed.Contains((string)addGameForm.AllowedFileExtensionsCheckList.Items[i]));
 
             return addGameForm;
         }

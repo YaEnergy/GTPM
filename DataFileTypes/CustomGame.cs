@@ -9,11 +9,10 @@ namespace GameTexturePackManager
     public class CustomGame
     {
         public string Name { get; set; } = "";
-        public string IconPath { get; set; } = "";
         public string FolderPath { get; set; } = "";
         public List<string> AllowedExtensions { get; set; } = new();
-
         public bool CheckIfUpToDateOnApply = true;
+
 
         /// <summary>
         /// Returns a CustomGame Object from a TXTDataFile that represents a Preset or Custom game

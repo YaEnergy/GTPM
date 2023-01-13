@@ -34,8 +34,17 @@ namespace GameTexturePackManager
             void SaveSettings()
             {
                 hasSettingsChanged = false;
+                settingsForm.ApplyButton.Enabled = !hasSettingsChanged;
                 //Save Settings
                 MessageBox.Show("Settings saved! TEST");
+            }
+
+            void OnSettingOptionChanged()
+            {
+                if (hasSettingsChanged) return;
+
+                hasSettingsChanged = true;
+                settingsForm.ApplyButton.Enabled = !hasSettingsChanged;
             }
 
             void OnClosing(object? s, FormClosingEventArgs args)
