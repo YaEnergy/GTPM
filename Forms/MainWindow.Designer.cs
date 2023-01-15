@@ -44,13 +44,13 @@
             // 
             // selectedGameLabel
             // 
-            this.selectedGameLabel.AutoSize = true;
+            this.selectedGameLabel.AutoSize = false;
             this.selectedGameLabel.Location = new System.Drawing.Point(12, 22);
             this.selectedGameLabel.Name = "selectedGameLabel";
             this.selectedGameLabel.Size = new System.Drawing.Size(109, 20);
             this.selectedGameLabel.TabIndex = 0;
             this.selectedGameLabel.Text = "Selected Game";
-            this.selectedGameLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.selectedGameLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // selectedGameComboBox
             // 

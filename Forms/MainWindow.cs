@@ -13,10 +13,11 @@ namespace GameTexturePackManager
             ResetDefaultTexturePackButton.Text = SettingsSystem.GetStringInLanguage("MainWindow_ResetDefaultTexturePackButton");
             OpenTexturePacksFolderButton.Text = SettingsSystem.GetStringInLanguage("MainWindow_OpenTexturePacksFolderButton");
             RefreshTexturePacksButton.Text = SettingsSystem.GetStringInLanguage("MainWindow_RefreshTexturePacksButton");
-            ApplyTexturePacksButton.Text = SettingsSystem.GetStringInLanguage("MainWindow_ApplyTexturePacksButton");
+            ApplyTexturePacksButton.Text = SettingsSystem.GetStringInLanguage("ApplyTexturePacks");
             selectedTexturePacksLabel.Text = SettingsSystem.GetStringInLanguage("MainWindow_SelectedTexturePacksLabel");
             availableTPLabel.Text = SettingsSystem.GetStringInLanguage("MainWindow_AvailableTexturePacksLabel");
             selectedGameLabel.Text = SettingsSystem.GetStringInLanguage("MainWindow_SelectedGameLabel");
+            OpenSettingsButton.Text = SettingsSystem.GetStringInLanguage("Settings_OpenButton");
         }
 
         public void SetEnabledStateAllGameButtons(bool enabled)

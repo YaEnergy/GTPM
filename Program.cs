@@ -10,7 +10,6 @@ namespace GameTexturePackManager
         private static Dictionary<string, string> EXTENSION_TYPES = new();
 
         private MainWindow mainWindow = new();
-        private AddGameForm addGameForm = new();
         private CustomGame? selectedGame = null;
         private Point startClickPointPos = Point.Empty;
         /// <summary>
@@ -73,7 +72,7 @@ namespace GameTexturePackManager
 
             DirectoryInfo[] games = new DirectoryInfo(GAMES_FOLDER_PATH).GetDirectories();
 
-            mainWindow.selectedGameComboBox.Items.Add("No game selected");
+            mainWindow.selectedGameComboBox.Items.Add(SettingsSystem.GetStringInLanguage("NoGameSelected"));
             mainWindow.selectedGameComboBox.SelectedIndex = 0;
             selectedGame = null;
             mainWindow.SetEnabledStateAllGameButtons(false);
@@ -81,7 +80,7 @@ namespace GameTexturePackManager
             foreach (DirectoryInfo game in games)
                 mainWindow.selectedGameComboBox.Items.Add(game.Name);
 
-            mainWindow.selectedGameComboBox.Items.Add("Add new game");
+            mainWindow.selectedGameComboBox.Items.Add(SettingsSystem.GetStringInLanguage("AddGame"));
             RefreshTexturePacksList();
         }
         private void RefreshTexturePacksList()
@@ -101,7 +100,8 @@ namespace GameTexturePackManager
         }
         private BackgroundWorker? CreateDefaultTexturePack(CustomGame game)
         {
-            DialogResult result = MessageBox.Show($"GTPM has to create a default texture pack for {game.Name}. If you have any texture packs already on, you might want to take them off before letting GTPM create a default texture pack. This will require {DataFileSystem.GetDirectoryByteSize(new DirectoryInfo(game.FolderPath)) / 1024 / 1024} MB.", "Default Texture Pack", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+            string defaultTexturePackName = SettingsSystem.GetStringInLanguage("DefaultTexturePack");
+            DialogResult result = MessageBox.Show(string.Format(SettingsSystem.GetStringInLanguage("DefaultTexturePackQuestion"), game.Name, DataFileSystem.GetDirectoryByteSize(new DirectoryInfo(game.FolderPath)) / 1024 / 1024), defaultTexturePackName, MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
             if (result != DialogResult.OK)
                 return null;
 
@@ -111,7 +111,7 @@ namespace GameTexturePackManager
             mainWindow.SetEnabledStateAllGameButtons(false);
             mainWindow.selectedGameComboBox.Enabled = false;
 
-            ProgressBarForm progressBarForm = new ProgressBarForm("Create Default Texture Pack");
+            ProgressBarForm progressBarForm = new ProgressBarForm(SettingsSystem.GetStringInLanguage("CreateDefaultTexturePack"));
             progressBarForm.Show();
             mainWindow.AddOwnedForm(progressBarForm);
 
@@ -132,16 +132,17 @@ namespace GameTexturePackManager
 
                 if (args.Error != null)
                 {
-                    MessageBox.Show($"An exception occurred while creating a default texture pack for {game.Name}. The texture pack has been removed. Error Message: {args.Error.Message}", "Default Texture Pack", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    string defaultTexturePackExceptionFormat = SettingsSystem.GetStringInLanguage("DefaultTexturePackException");
+                    MessageBox.Show(string.Format(defaultTexturePackExceptionFormat, game.Name, args.Error.Message), defaultTexturePackName, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     Directory.Delete(defaultTPPath, true);
                 }
                 else if (args.Cancelled)
                 {
-                    MessageBox.Show($"Texture Pack creation has been cancelled. The texture pack has been removed.", "Default Texture Pack", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show(SettingsSystem.GetStringInLanguage("DefaultTexturePackCancel"), defaultTexturePackName, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     Directory.Delete(defaultTPPath, true);
                 }
                 else
-                    MessageBox.Show($"Created a default texture pack for {game.Name}!", "Default Texture Pack", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show(string.Format(SettingsSystem.GetStringInLanguage("DefaultTexturePackSuccess"), game.Name), defaultTexturePackName, MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 mainWindow.SetEnabledStateAllGameButtons(true);
                 RefreshSelectedGameDropdown();
@@ -154,7 +155,7 @@ namespace GameTexturePackManager
         private Exception? AddCustomGame(CustomGame game)
         {
             if (!Directory.Exists(game.FolderPath))
-                return new Exception("Content folder path doesn't exist! " + game.FolderPath);
+                return new Exception(string.Format(SettingsSystem.GetStringInLanguage("ContentFolderPathNotFound"), game.FolderPath));
 
             string newGameFolderPath = GAMES_FOLDER_PATH + $@"\{game.Name}";
             if (!Directory.Exists(newGameFolderPath))
@@ -171,7 +172,7 @@ namespace GameTexturePackManager
 
             if (!DataFileSystem.HasEnoughAvailableFreeSpace(bytesReq, Directory.GetDirectoryRoot(GAMES_FOLDER_PATH)))
             {
-                MessageBox.Show($"You must have {bytesReq / 1000 / 1000} MB available on your computer to add this custom game.", "Not enough space!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(string.Format(SettingsSystem.GetStringInLanguage("DefaultTexturePackNotEnoughSpaceError"), bytesReq / 1024 / 1024), SettingsSystem.GetStringInLanguage("CustomGameCreationError"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return null;
             }
             else
@@ -293,7 +294,8 @@ namespace GameTexturePackManager
                 if (!game.AllowedExtensions.Contains(file.Extension))
                     continue;
 
-                worker.ReportProgress(filesDone / totalFiles * 100, $"Overwriting {file.Name}\n({Math.Floor((double)filesDone / totalFiles * 100)}%) ({filesDone}/{totalFiles} files)");
+                string overwritingFilesFormat = SettingsSystem.GetStringInLanguage("OverwritingFilesProgress");
+                worker.ReportProgress(filesDone / totalFiles * 100, string.Format(overwritingFilesFormat, file.Name, Math.Floor((double)filesDone / totalFiles * 100), filesDone, totalFiles));
                 filesDone++;
 
                 string filePathInTexturePack = file.FullName.Replace(game.FolderPath, "");
@@ -311,7 +313,7 @@ namespace GameTexturePackManager
                     }
 
                 if (!textureFound)
-                    throw new Exception($"Texture {filePathInTexturePack} not found in any texture pack (including default)!");
+                    throw new Exception(string.Format(SettingsSystem.GetStringInLanguage("TextureNotFoundException"), filePathInTexturePack));
             }
 
             DirectoryInfo[] directories = gameFolder.GetDirectories();
@@ -332,11 +334,11 @@ namespace GameTexturePackManager
                 foreach (char c in Path.GetInvalidFileNameChars())
                     invalidPathCharsString += c;
 
-                MessageBox.Show($"The Game Name cannot contain invalid file name characters.");
+                MessageBox.Show(SettingsSystem.GetStringInLanguage("InvalidGameName"));
                 return;
             }
 
-            DialogResult dialogResult = MessageBox.Show($"Are you sure that you want to add/configure {addGameForm.GameNameTextBox.Text} as a custom game?", "Add/Configure Custom Game", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult dialogResult = MessageBox.Show(string.Format(SettingsSystem.GetStringInLanguage("AddGameQuestion"), addGameForm.GameNameTextBox.Text), SettingsSystem.GetStringInLanguage("AddGame"), MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (dialogResult != DialogResult.Yes)
                 return;
 
@@ -344,24 +346,25 @@ namespace GameTexturePackManager
             game.Name = addGameForm.GameNameTextBox.Text;
             game.FolderPath = addGameForm.ContentFolderPathTextBox.Text;
             foreach (string key in addGameForm.AllowedFileExtensionsCheckList.CheckedItems)
-                foreach (string extension in EXTENSION_TYPES[key].Split(':'))
+                foreach (string extension in EXTENSION_TYPES[SettingsSystem.DefaultLanguage[SettingsSystem.GetKeyFromStringInLanguage(key, SettingsSystem.SelectedLanguage)]].Split(':'))
                     game.AllowedExtensions.Add(extension.ToLower());
 
             addGameForm.Close();
             Exception? ex = AddCustomGame(game);
             if (ex != null)
             {
-                MessageBox.Show(ex.Message, "Custom Game Creation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message, SettingsSystem.GetStringInLanguage("CustomGameCreationError"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 string path = GAMES_FOLDER_PATH + $@"\{game.Name}";
                 if (Directory.Exists(path) && Directory.GetDirectories(path).Length == 0 && Directory.GetFiles(path).Length == 0)
                 {
                     Directory.Delete(path);
-                    MessageBox.Show(@$"{GAMES_FOLDER_PATH}\{game.Name} has been removed.", "Custom Game Creation Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show(string.Format(SettingsSystem.GetStringInLanguage("GameDirectoryRemoved"), GAMES_FOLDER_PATH, game.Name), SettingsSystem.GetStringInLanguage("CustomGameCreationError"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
         }
         private BackgroundWorker? ApplySelectedTexturePacksToGame(CustomGame game, bool askQuestion = true)
         {
+            string applyTexturePacksString = SettingsSystem.GetStringInLanguage("ApplyTexturePacks");
             List<string> texturePacks = new();
             long bytesRequired = 0;
             for (int i = 0; i < mainWindow.SelectedTexturePacksList.Items.Count; i++)
@@ -373,13 +376,13 @@ namespace GameTexturePackManager
 
             if(!DataFileSystem.HasEnoughAvailableFreeSpace(bytesRequired, Directory.GetDirectoryRoot(GAMES_FOLDER_PATH)))
             {
-                MessageBox.Show($"You do not have enough available free space to apply these texture packs. ({bytesRequired / 1000 / 1000} MB)", "Apply Texture Packs", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(string.Format(SettingsSystem.GetStringInLanguage("ApplyTexturePackNotEnoughSpaceError"), bytesRequired / 1024 / 1024), applyTexturePacksString, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return null;
             }
 
             if(askQuestion)
             {
-                DialogResult result = MessageBox.Show($"Are you sure you want to apply the selected texture packs?", "Apply Texture Packs", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                DialogResult result = MessageBox.Show(SettingsSystem.GetStringInLanguage("ApplyTexturePackQuestion"), applyTexturePacksString, MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
                 if (result != DialogResult.OK)
                     return null;
             }
@@ -390,7 +393,7 @@ namespace GameTexturePackManager
             mainWindow.SetEnabledStateAllGameButtons(false);
             mainWindow.selectedGameComboBox.Enabled = false;
 
-            ProgressBarForm progressBarForm = new ProgressBarForm("Applying Texture Packs");
+            ProgressBarForm progressBarForm = new ProgressBarForm(applyTexturePacksString);
             progressBarForm.Show();
             mainWindow.AddOwnedForm(progressBarForm);
 
@@ -410,11 +413,11 @@ namespace GameTexturePackManager
                 progressBarForm.Close();
 
                 if (args.Error != null)
-                    MessageBox.Show($"An exception occurred while applying texture packs for {game.Name}. Error Message: {args.Error.Message}", "Apply Texture Packs", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(string.Format(SettingsSystem.GetStringInLanguage("ApplyException"), game.Name, args.Error.Message), applyTexturePacksString, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 else if (args.Cancelled)
-                    MessageBox.Show($"Texture Pack Apply has been cancelled.", "Apply Texture Packs", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show(SettingsSystem.GetStringInLanguage("ApplyCancel"), applyTexturePacksString, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 else
-                    MessageBox.Show($"Applied texture packs to {game.Name}!", "Apply Texture Packs", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show(string.Format(SettingsSystem.GetStringInLanguage("ApplySuccess"), game.Name), applyTexturePacksString, MessageBoxButtons.OK, MessageBoxIcon.Information);
 
 
                 mainWindow.SetEnabledStateAllGameButtons(true);
@@ -423,7 +426,7 @@ namespace GameTexturePackManager
 
                 if (args.Error != null || args.Cancelled)
                 {
-                    DialogResult result = MessageBox.Show("Would you like to apply the default texture pack only?", "Apply Texture Packs", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    DialogResult result = MessageBox.Show(SettingsSystem.GetStringInLanguage("ApplyDefaultQuestion"), applyTexturePacksString, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                     if(result == DialogResult.Yes)
                         ApplySelectedTexturePacksToGame(game, false);
                 }
@@ -500,6 +503,9 @@ namespace GameTexturePackManager
                 SettingsForm settingsForm = SettingsForm.CreateSettingsDialog();
                 settingsForm.Icon = mainWindow.Icon;
                 settingsForm.ShowDialog();
+
+                mainWindow.ApplyLanguage();
+                RefreshSelectedGameDropdown();
             };
 
             SelectGame(0);

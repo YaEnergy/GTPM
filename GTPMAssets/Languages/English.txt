@@ -43,9 +43,9 @@ GameDirectoryRemoved
 ContentFolderPathNotFound
 Content folder path doesn't exist! {0}
 OverwritingFilesProgress
-Overwriting {0}\n({1}%) ({2}/{3} files)
+Overwriting {0}<br>({1}%) ({2}/{3} files)
 CopyingFilesProgress
-Copying {0}\n({1}%) ({2}/{3} files)
+Copying {0}<br>({1}%) ({2}/{3} files)
 DefaultTexturePackException
 An exception occurred while creating a default texture pack for {0}. The texture pack has been removed. Error Message: {1}
 DefaultTexturePackQuestion
@@ -86,3 +86,21 @@ Settings_OpenButton
 Open GTPM Settings
 Settings_AskToSave
 You haven't saved yet. Would you like to save your settings?
+Settings_Saved
+Settings saved!
+ImagesExt
+Images
+AudioExt
+Audio
+VideosExt
+Videos
+3D ModelsExt
+3D Models
+FontsExt
+Fonts
+plistExt
+plist
+XNBExt
+XNB
+TextExt
+Text

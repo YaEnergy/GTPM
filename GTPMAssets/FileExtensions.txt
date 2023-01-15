@@ -1,10 +1,10 @@
-﻿Image
+﻿Images
 .png:.jpg:.gif:.tiff:.jpeg:.svg:.tif:.heic:.bmp:.ico
 Audio
 .ogg:.wav:.mp3:.m4a:.mid:.m3u:.flac:.aif:.midi:.cda:.mpa:.wma
-Video
+Videos
 .mp4:.mov:.avi:.flv:.avchd:.mpg:.wmv
-3D Model
+3D Models
 .obj:.3dm:.dae:.fbx:.max
 Fonts
 .fnt:.otf:.ttf:.woff:.woff2:.fon

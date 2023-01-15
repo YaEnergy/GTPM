@@ -43,6 +43,7 @@
             this.progressLabel.TabIndex = 0;
             this.progressLabel.Text = "ProgressText";
             this.progressLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.progressLabel.UseWaitCursor = true;
             // 
             // progressBar
             // 

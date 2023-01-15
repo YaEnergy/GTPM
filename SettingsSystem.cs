@@ -48,9 +48,27 @@ namespace GameTexturePackManager
             DefaultLanguage = DataFileSystem.GetDataFromTXTDataFile(new FileInfo(LanguageFolderPath + languageName + ".txt"));
         }
 
+        public static string GetKeyFromStringInLanguage(string Text, Dictionary<string, string> languageDict)
+        {
+            foreach(KeyValuePair<string, string> kvp in languageDict)
+                if(kvp.Value == Text)
+                    return kvp.Key;
+
+            throw new Exception("Text not found");
+        }
+
+        public static string GetStringInLanguage(string key, Dictionary<string, string> languageDict)
+        {
+            string Value = languageDict.ContainsKey(key) ? languageDict[key] : DefaultLanguage[key];
+
+            return Value.Replace("<br>", "\n");
+        }
+
         public static string GetStringInLanguage(string key)
         {
-            return SelectedLanguage.ContainsKey(key) ? SelectedLanguage[key] : DefaultLanguage[key];
+            string Value = SelectedLanguage.ContainsKey(key) ? SelectedLanguage[key] : DefaultLanguage[key];
+
+            return Value.Replace("<br>", "\n");
         }
         public static Dictionary<string, string> GetSettingsDictionary()
         {

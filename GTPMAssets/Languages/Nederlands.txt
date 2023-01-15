@@ -1,7 +1,7 @@
 ﻿ApplicationName
 Game Texture Pack Manager
 MainWindow_SelectedGameLabel
-Geselecteerde spel
+Gekozen spel
 MainWindow_ConfigureGameButton
 Configureer spel
 MainWindow_AvailableTexturePacksLabel
@@ -9,7 +9,7 @@ Beschikbare textuurpakketten
 MainWindow_SelectedTexturePacksLabel
 Geselecteerde textuurpakketten
 MainWindow_ApplyTexturePacksButton
-Breng textuurpakketten aan spel
+Breng textuurpakketten aan
 MainWindow_RefreshTexturePacksButton
 Vernieuw textuurpakketten
 MainWindow_OpenTexturePacksFolderButton
@@ -43,13 +43,13 @@ GameDirectoryRemoved
 ContentFolderPathNotFound
 Inhoud map pad bestaat niet! {0}
 OverwritingFilesProgress
-{0} aan het overschrijven\n({1}%) ({2}/{3} files)
+{0} aan het overschrijven<br>({1}%) ({2}/{3} files)
 CopyingFilesProgress
-{0} aan het kopiëren\n({1}%) ({2}/{3} files)
+{0} aan het kopiëren<br>({1}%) ({2}/{3} files)
 DefaultTexturePackException
 Er is een fout gebeurd tijdens het maken van een standaard textuurpakket voor {0}. De textuurpakket werd verwijderd. Fout bericht: {1}
 DefaultTexturePackQuestion
-GTPM moet een standaard textuurpakket maken for {0}. Als u textuurpakketten al aan heb, is het best dat u ze uit doet voordat u GTPM dit laat doen. Dit zal {0} MB nodig hebben.
+GTPM moet een standaard textuurpakket maken for {0}. Als u textuurpakketten al aan heb, is het best dat u ze uit doet voordat u GTPM dit laat doen. Dit zal {1} MB nodig hebben.
 DefaultTexturePack
 Standaard textuurpakket
 DefaultTexturePackSuccess
@@ -86,3 +86,21 @@ Settings_OpenButton
 Open GTPM Instellingen
 Settings_AskToSave
 U heeft nog niet bewaard. Zou u graag uw instellingen bewaren?
+Settings_Saved
+Instellingen bewaard!
+ImagesExt
+Fotos
+AudioExt
+Geluid
+VideosExt
+Videos
+3D ModelsExt
+3D Modellen
+FontsExt
+Lettertypes
+plistExt
+plist
+XNBExt
+XNB
+TextExt
+Tekst

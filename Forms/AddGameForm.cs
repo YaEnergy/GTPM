@@ -12,7 +12,7 @@ namespace GameTexturePackManager
 {
     public partial class AddGameForm : Form
     {
-        public static List<string> AUTO_CHECKED_EXT = new() { "Image", "Audio", "Video", "3D Model", "Fonts" };
+        public static List<string> AUTO_CHECKED_EXT = new() { "Images", "Audio", "Videos", "3D Models", "Fonts" };
         public AddGameForm()
         {
             InitializeComponent();
@@ -23,9 +23,9 @@ namespace GameTexturePackManager
         {
             AllowedFileExtensionsCheckList.Items.Clear();
 
-            Dictionary<string, string> extensionTypes = DataFileSystem.GetDataFromTXTDataFile(new FileInfo(@"GTPMAssets\FileExtensions.txt"));
+            /*Dictionary<string, string> extensionTypes = DataFileSystem.GetDataFromTXTDataFile(new FileInfo(@"GTPMAssets\FileExtensions.txt"));
             foreach (string ext in extensionTypes.Keys)
-                AllowedFileExtensionsCheckList.Items.Add(ext, AUTO_CHECKED_EXT.Contains(ext));
+                AllowedFileExtensionsCheckList.Items.Add(SettingsSystem.GetStringInLanguage(ext + "Ext"), AUTO_CHECKED_EXT.Contains(ext));*/
         }
 
         private void SelectFolderButton_Click(object sender, EventArgs e)
@@ -53,6 +53,10 @@ namespace GameTexturePackManager
 
             addGameForm.ApplyLanguage();
 
+            Dictionary<string, string> extensionTypes = DataFileSystem.GetDataFromTXTDataFile(new FileInfo(@"GTPMAssets\FileExtensions.txt"));
+            foreach (string ext in extensionTypes.Keys)
+                addGameForm.AllowedFileExtensionsCheckList.Items.Add(SettingsSystem.GetStringInLanguage(ext + "Ext"), AUTO_CHECKED_EXT.Contains(ext));
+
             string[] presetGameFilePaths = Directory.GetFiles(@"GTPMAssets\Presets");
             List<CustomGame> foundPresetGames = new();
             foreach (string presetGameFilePath in presetGameFilePaths)
@@ -74,7 +78,10 @@ namespace GameTexturePackManager
 
                     string[] fileTypesAllowed = DataFileSystem.GetFileTypesWithFileExtensions(game.AllowedExtensions);
                     for (int i = 0; i < addGameForm.AllowedFileExtensionsCheckList.Items.Count; i++)
-                        addGameForm.AllowedFileExtensionsCheckList.SetItemChecked(i, fileTypesAllowed.Contains((string)addGameForm.AllowedFileExtensionsCheckList.Items[i]));
+                    {
+                        string fileType = SettingsSystem.DefaultLanguage[SettingsSystem.GetKeyFromStringInLanguage((string)addGameForm.AllowedFileExtensionsCheckList.Items[i], SettingsSystem.SelectedLanguage)];
+                        addGameForm.AllowedFileExtensionsCheckList.SetItemChecked(i, fileTypesAllowed.Contains(fileType));
+                    }
                 };
             }
             else
@@ -93,7 +100,10 @@ namespace GameTexturePackManager
             addGameForm.ContentFolderPathTextBox.Text = "";
 
             for (int i = 0; i < addGameForm.AllowedFileExtensionsCheckList.Items.Count; i++)
-                addGameForm.AllowedFileExtensionsCheckList.SetItemChecked(i, AUTO_CHECKED_EXT.Contains((string)addGameForm.AllowedFileExtensionsCheckList.Items[i]));
+            {
+                string fileType = SettingsSystem.DefaultLanguage[SettingsSystem.GetKeyFromStringInLanguage((string)addGameForm.AllowedFileExtensionsCheckList.Items[i], SettingsSystem.SelectedLanguage)];
+                addGameForm.AllowedFileExtensionsCheckList.SetItemChecked(i, AUTO_CHECKED_EXT.Contains(fileType));
+            }
 
             return addGameForm;
         }
@@ -111,7 +121,10 @@ namespace GameTexturePackManager
 
             string[] fileTypesAllowed = DataFileSystem.GetFileTypesWithFileExtensions(toConfigureGame.AllowedExtensions);
             for (int i = 0; i < addGameForm.AllowedFileExtensionsCheckList.Items.Count; i++)
-                addGameForm.AllowedFileExtensionsCheckList.SetItemChecked(i, fileTypesAllowed.Contains((string)addGameForm.AllowedFileExtensionsCheckList.Items[i]));
+            {
+                string fileType = SettingsSystem.DefaultLanguage[SettingsSystem.GetKeyFromStringInLanguage((string)addGameForm.AllowedFileExtensionsCheckList.Items[i], SettingsSystem.SelectedLanguage)];
+                addGameForm.AllowedFileExtensionsCheckList.SetItemChecked(i, fileTypesAllowed.Contains(fileType));
+            }
 
             return addGameForm;
         }

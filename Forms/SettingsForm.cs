@@ -46,7 +46,7 @@ namespace GameTexturePackManager
                 if (ex != null) 
                     throw ex;
 
-                MessageBox.Show("Settings saved! not in language files yet");
+                MessageBox.Show(SettingsSystem.GetStringInLanguage("Settings_Saved"), SettingsSystem.GetStringInLanguage("Settings_Name"));
             }
 
             void OnSettingOptionChanged()

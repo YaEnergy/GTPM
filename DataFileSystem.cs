@@ -115,7 +115,8 @@ namespace GameTexturePackManager
                     return filesDone;
                 }
 
-                worker.ReportProgress(filesDone / totalFiles * 100, $"Copying {file.Name}\n({Math.Floor((double)filesDone / totalFiles * 100)}%) ({filesDone}/{totalFiles} files)");
+                string copyingFilesFormat = SettingsSystem.GetStringInLanguage("CopyingFilesProgress");
+                worker.ReportProgress(filesDone / totalFiles * 100, string.Format(copyingFilesFormat, file.Name, Math.Floor((double)filesDone / totalFiles * 100), filesDone, totalFiles));
                 filesDone++;
                 
                 if (!allowedExtensions.Contains(file.Extension.ToLower()))
