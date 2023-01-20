@@ -380,6 +380,11 @@ namespace GameTexturePackManager
                     
                     if (result == DialogResult.Yes)
                         CreateDefaultTexturePack(game);
+                    else
+                    {
+                        mainWindow.SetEnabledStateAllGameButtons(true);
+                        mainWindow.selectedGameComboBox.Enabled = true;
+                    }
 
                     return null;
                 }
