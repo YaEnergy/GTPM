@@ -11,7 +11,7 @@ namespace GameTexturePackManager
         public string Name { get; set; } = "";
         public string FolderPath { get; set; } = "";
         public List<string> AllowedExtensions { get; set; } = new();
-        public bool CheckIfUpToDateOnApply = true;
+        public bool CheckIfUpToDate = true;
 
 
         /// <summary>
@@ -24,7 +24,7 @@ namespace GameTexturePackManager
             Dictionary<string, string> data = DataFileSystem.GetDataFromTXTDataFile(file);
             game.Name = data.ContainsKey("GameName") ? data["GameName"] : "null";
             game.FolderPath = data.ContainsKey("FolderPath") ? data["FolderPath"] : "null";
-            game.CheckIfUpToDateOnApply = data.ContainsKey("CheckIfUpToDateOnApply") ? bool.Parse(data["CheckIfUpToDateOnApply"]) : true;
+            game.CheckIfUpToDate = data.ContainsKey("CheckIfUpToDate") ? bool.Parse(data["CheckIfUpToDate"]) : true;
 
             if (data.ContainsKey("AllowedExtensions"))
             {
@@ -36,12 +36,31 @@ namespace GameTexturePackManager
             return game;
         }
 
+        public int GetTotalAllowedFilesInDirectory(DirectoryInfo dir, int numFiles = 0)
+        {
+            foreach (FileInfo file in dir.GetFiles())
+                if (AllowedExtensions.Contains(file.Extension))
+                    numFiles++;
+
+            foreach (DirectoryInfo subDir in dir.GetDirectories())
+                numFiles = GetTotalAllowedFilesInDirectory(subDir, numFiles);
+
+            return numFiles;
+        }
+        public bool IsDefaultTexturePackUpToDate()
+        {
+            int totalDefaultTexturePackFiles = GetTotalAllowedFilesInDirectory(new DirectoryInfo($@"GTPMAssets\Games\{Name}\TexturePacks\Default"));
+            int totalAllowedGameFiles = GetTotalAllowedFilesInDirectory(new DirectoryInfo(FolderPath));
+
+            return totalDefaultTexturePackFiles == totalAllowedGameFiles;
+        }
+
         public Dictionary<string, string> ToDictionary()
         {
             Dictionary<string, string> data = new();
             data.Add("GameName", Name);
             data.Add("FolderPath", FolderPath);
-            data.Add("CheckIfUpToDateOnApply", CheckIfUpToDateOnApply.ToString());
+            data.Add("CheckIfUpToDate", CheckIfUpToDate.ToString());
 
             string allowedExtensionsString = "";
             for (int i = 0; i < AllowedExtensions.Count; i++)

@@ -60,6 +60,10 @@ DefaultTexturePackNotEnoughSpaceError
 You must have {0} MB available on your computer to add this custom game.
 CreateDefaultTexturePack
 Create Default Texture Pack
+DefaultTexturePackNotUpToDateQuestion
+Default texture pack is not up-to-date. Would you like to reset the default texture pack?<br>(Note: GTPM cannot always detect this!)
+TexturePackUpToDateSetting
+Try to keep up-to-date
 ApplyTexturePackNotEnoughSpaceError
 You do not have enough available free space to apply these texture packs. ({0} MB)
 TextureNotFoundException

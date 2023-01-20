@@ -60,6 +60,10 @@ DefaultTexturePackNotEnoughSpaceError
 U heeft {0} MB nodig om deze spel toe te voegen.
 CreateDefaultTexturePack
 Maak standaard textuurpakket
+DefaultTexturePackNotUpToDateQuestion
+Standaard textuurpakket is niet up-to-date. Zou u graag de standaard textuurpakket resetten?<br>(Opmerking: GTPM kan dit niet altijd detecteren!)
+TexturePackUpToDateSetting
+Probeer up-to-date te blijven
 ApplyTexturePackNotEnoughSpaceError
 U heeft niet genoeg vrije plaats over om deze textuurpakketten aan te brengen ({0} MB)
 TextureNotFoundException

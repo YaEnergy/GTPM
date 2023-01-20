@@ -362,8 +362,24 @@ namespace GameTexturePackManager
                 }
             }
         }
+
         private BackgroundWorker? ApplySelectedTexturePacksToGame(CustomGame game, bool askQuestion = true)
         {
+            mainWindow.SetEnabledStateAllGameButtons(false);
+            mainWindow.selectedGameComboBox.Enabled = false;
+
+            // Check if default texture pack is up-to-date
+            if (game.CheckIfUpToDate)
+                if (!game.IsDefaultTexturePackUpToDate())
+                {
+                    DialogResult result = MessageBox.Show(SettingsSystem.GetStringInLanguage("DefaultTexturePackNotUpToDateQuestion"), SettingsSystem.GetStringInLanguage("DefaultTexturePack"), MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    
+                    if (result == DialogResult.Yes)
+                        CreateDefaultTexturePack(game);
+
+                    return null;
+                }
+
             string applyTexturePacksString = SettingsSystem.GetStringInLanguage("ApplyTexturePacks");
             List<string> texturePacks = new();
             long bytesRequired = 0;
@@ -377,6 +393,8 @@ namespace GameTexturePackManager
             if(!DataFileSystem.HasEnoughAvailableFreeSpace(bytesRequired, Directory.GetDirectoryRoot(GAMES_FOLDER_PATH)))
             {
                 MessageBox.Show(string.Format(SettingsSystem.GetStringInLanguage("ApplyTexturePackNotEnoughSpaceError"), bytesRequired / 1024 / 1024), applyTexturePacksString, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                mainWindow.SetEnabledStateAllGameButtons(true);
+                mainWindow.selectedGameComboBox.Enabled = true;
                 return null;
             }
 
@@ -384,14 +402,19 @@ namespace GameTexturePackManager
             {
                 DialogResult result = MessageBox.Show(SettingsSystem.GetStringInLanguage("ApplyTexturePackQuestion"), applyTexturePacksString, MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
                 if (result != DialogResult.OK)
+                {
+                    mainWindow.SetEnabledStateAllGameButtons(true);
+                    mainWindow.selectedGameComboBox.Enabled = true;
                     return null;
+                }
             }
 
             if (!Directory.Exists(game.FolderPath))
+            {
+                mainWindow.SetEnabledStateAllGameButtons(true);
+                mainWindow.selectedGameComboBox.Enabled = true;
                 return null;
-
-            mainWindow.SetEnabledStateAllGameButtons(false);
-            mainWindow.selectedGameComboBox.Enabled = false;
+            }
 
             ProgressBarForm progressBarForm = new ProgressBarForm(applyTexturePacksString);
             progressBarForm.Show();
