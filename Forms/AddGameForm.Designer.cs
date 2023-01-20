@@ -36,6 +36,7 @@
             this.SelectFolderButton = new System.Windows.Forms.Button();
             this.AddGameButton = new System.Windows.Forms.Button();
             this.GameNameTextBox = new System.Windows.Forms.ComboBox();
+            this.TexturePackUpToDateCheckbox = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // AllowedFileExtensionsCheckList
@@ -94,7 +95,7 @@
             // 
             // AddGameButton
             // 
-            this.AddGameButton.Location = new System.Drawing.Point(12, 274);
+            this.AddGameButton.Location = new System.Drawing.Point(12, 312);
             this.AddGameButton.Name = "AddGameButton";
             this.AddGameButton.Size = new System.Drawing.Size(286, 29);
             this.AddGameButton.TabIndex = 7;
@@ -109,11 +110,22 @@
             this.GameNameTextBox.Size = new System.Drawing.Size(286, 28);
             this.GameNameTextBox.TabIndex = 8;
             // 
+            // TexturePackUpToDateCheckbox
+            // 
+            this.TexturePackUpToDateCheckbox.AutoSize = true;
+            this.TexturePackUpToDateCheckbox.Location = new System.Drawing.Point(12, 273);
+            this.TexturePackUpToDateCheckbox.Name = "TexturePackUpToDateCheckbox";
+            this.TexturePackUpToDateCheckbox.Size = new System.Drawing.Size(222, 24);
+            this.TexturePackUpToDateCheckbox.TabIndex = 10;
+            this.TexturePackUpToDateCheckbox.Text = "TexturePackUpToDateSetting";
+            this.TexturePackUpToDateCheckbox.UseVisualStyleBackColor = true;
+            // 
             // AddGameForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(310, 315);
+            this.ClientSize = new System.Drawing.Size(310, 353);
+            this.Controls.Add(this.TexturePackUpToDateCheckbox);
             this.Controls.Add(this.GameNameTextBox);
             this.Controls.Add(this.AddGameButton);
             this.Controls.Add(this.SelectFolderButton);
@@ -122,8 +134,8 @@
             this.Controls.Add(this.fileExtensionsChecklistLabel);
             this.Controls.Add(this.ContentFolderPathTextBox);
             this.Controls.Add(this.AllowedFileExtensionsCheckList);
-            this.MaximumSize = new System.Drawing.Size(328, 362);
-            this.MinimumSize = new System.Drawing.Size(328, 362);
+            this.MaximumSize = new System.Drawing.Size(328, 400);
+            this.MinimumSize = new System.Drawing.Size(328, 400);
             this.Name = "AddGameForm";
             this.Text = "Add Custom Game";
             this.ResumeLayout(false);
@@ -141,5 +153,6 @@
         public Button SelectFolderButton;
         public Button AddGameButton;
         public ComboBox GameNameTextBox;
+        public CheckBox TexturePackUpToDateCheckbox;
     }
 }

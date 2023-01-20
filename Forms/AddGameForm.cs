@@ -16,16 +16,6 @@ namespace GameTexturePackManager
         public AddGameForm()
         {
             InitializeComponent();
-            ResetFormControls();
-        }
-
-        public void ResetFormControls()
-        {
-            AllowedFileExtensionsCheckList.Items.Clear();
-
-            /*Dictionary<string, string> extensionTypes = DataFileSystem.GetDataFromTXTDataFile(new FileInfo(@"GTPMAssets\FileExtensions.txt"));
-            foreach (string ext in extensionTypes.Keys)
-                AllowedFileExtensionsCheckList.Items.Add(SettingsSystem.GetStringInLanguage(ext + "Ext"), AUTO_CHECKED_EXT.Contains(ext));*/
         }
 
         private void SelectFolderButton_Click(object sender, EventArgs e)
@@ -45,6 +35,7 @@ namespace GameTexturePackManager
             fileExtensionsChecklistLabel.Text = SettingsSystem.GetStringInLanguage("AddGameForm_AllowedFileTypesLabel");
             AddGameButton.Text = Text = SettingsSystem.GetStringInLanguage("AddGame");
             SelectFolderButton.Text = SettingsSystem.GetStringInLanguage("AddGameForm_SelectFolderButton");
+            TexturePackUpToDateCheckbox.Text = SettingsSystem.GetStringInLanguage("TexturePackUpToDateSetting");
         }
 
         private static AddGameForm CreateBaseAddGameForm()
@@ -98,6 +89,7 @@ namespace GameTexturePackManager
             addGameForm.GameNameTextBox.Enabled = true;
             addGameForm.GameNameTextBox.Text = "";
             addGameForm.ContentFolderPathTextBox.Text = "";
+            addGameForm.TexturePackUpToDateCheckbox.Checked = true;
 
             for (int i = 0; i < addGameForm.AllowedFileExtensionsCheckList.Items.Count; i++)
             {
@@ -118,6 +110,7 @@ namespace GameTexturePackManager
             addGameForm.GameNameTextBox.Text = toConfigureGame.Name;
             addGameForm.GameNameTextBox.Enabled = false;
             addGameForm.ContentFolderPathTextBox.Text = toConfigureGame.FolderPath;
+            addGameForm.TexturePackUpToDateCheckbox.Checked = toConfigureGame.CheckIfUpToDate;
 
             string[] fileTypesAllowed = DataFileSystem.GetFileTypesWithFileExtensions(toConfigureGame.AllowedExtensions);
             for (int i = 0; i < addGameForm.AllowedFileExtensionsCheckList.Items.Count; i++)

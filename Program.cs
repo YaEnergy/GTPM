@@ -342,9 +342,13 @@ namespace GameTexturePackManager
             if (dialogResult != DialogResult.Yes)
                 return;
 
+            if (addGameForm.TexturePackUpToDateCheckbox.Checked)
+                MessageBox.Show(SettingsSystem.GetStringInLanguage("UpToDateSettingNote"), SettingsSystem.GetStringInLanguage("AddGame"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+
             CustomGame game = new CustomGame();
             game.Name = addGameForm.GameNameTextBox.Text;
             game.FolderPath = addGameForm.ContentFolderPathTextBox.Text;
+            game.CheckIfUpToDate = addGameForm.TexturePackUpToDateCheckbox.Checked;
             foreach (string key in addGameForm.AllowedFileExtensionsCheckList.CheckedItems)
                 foreach (string extension in EXTENSION_TYPES[SettingsSystem.DefaultLanguage[SettingsSystem.GetKeyFromStringInLanguage(key, SettingsSystem.SelectedLanguage)]].Split(':'))
                     game.AllowedExtensions.Add(extension.ToLower());

@@ -64,6 +64,8 @@ DefaultTexturePackNotUpToDateQuestion
 Standaard textuurpakket is niet up-to-date. Zou u graag de standaard textuurpakket resetten?<br>(Opmerking: GTPM kan dit niet altijd detecteren!)
 TexturePackUpToDateSetting
 Probeer up-to-date te blijven
+UpToDateSettingNote
+Opmerking: GTPM kan niet altijd spel updates detecteren, blijf alsjeblieft op de hoogte van updates!
 ApplyTexturePackNotEnoughSpaceError
 U heeft niet genoeg vrije plaats over om deze textuurpakketten aan te brengen ({0} MB)
 TextureNotFoundException
