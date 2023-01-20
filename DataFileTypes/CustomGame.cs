@@ -52,7 +52,7 @@ namespace GameTexturePackManager
             int totalDefaultTexturePackFiles = GetTotalAllowedFilesInDirectory(new DirectoryInfo($@"GTPMAssets\Games\{Name}\TexturePacks\Default"));
             int totalAllowedGameFiles = GetTotalAllowedFilesInDirectory(new DirectoryInfo(FolderPath));
 
-            return totalDefaultTexturePackFiles == totalAllowedGameFiles;
+            return totalDefaultTexturePackFiles >= totalAllowedGameFiles;
         }
 
         public Dictionary<string, string> ToDictionary()
