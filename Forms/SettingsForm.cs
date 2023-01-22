@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Globalization;
 
 namespace GameTexturePackManager
 {
@@ -26,6 +27,8 @@ namespace GameTexturePackManager
 
         public static SettingsForm CreateSettingsDialog()
         {
+            string[] languageCodes = SettingsSystem.GetLanguageNames();
+
             bool hasSettingsChanged = false;
 
             SettingsForm settingsForm = new();
@@ -36,8 +39,7 @@ namespace GameTexturePackManager
                 hasSettingsChanged = false;
                 settingsForm.ApplyButton.Enabled = hasSettingsChanged;
 
-                string languageName = (string)settingsForm.LanguageComboBox.SelectedItem;
-                SettingsSystem.SetLanguage(languageName);
+                SettingsSystem.SetLanguage(CultureInfo.GetCultureInfo(languageCodes[settingsForm.LanguageComboBox.SelectedIndex]).TwoLetterISOLanguageName);
 
                 settingsForm.ApplyLanguage();
                 
@@ -80,11 +82,10 @@ namespace GameTexturePackManager
             settingsForm.LanguageComboBox.SelectionChangeCommitted += (object? s, EventArgs args)
                 => OnSettingOptionChanged();
 
-            string[] languageNames = SettingsSystem.GetLanguageNames();
-            foreach (string languageName in languageNames)
-                settingsForm.LanguageComboBox.Items.Add(languageName);
+            for (int i = 0; i < languageCodes.Length; i++)
+                settingsForm.LanguageComboBox.Items.Add(CultureInfo.GetCultureInfo(languageCodes[i]).NativeName);
 
-            settingsForm.LanguageComboBox.SelectedIndex = settingsForm.LanguageComboBox.FindString(SettingsSystem.SelectedLanguageName);
+            settingsForm.LanguageComboBox.SelectedIndex = settingsForm.LanguageComboBox.FindString(CultureInfo.GetCultureInfo(SettingsSystem.SelectedLanguageName).NativeName);
 
             return settingsForm;
         }

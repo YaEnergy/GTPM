@@ -1,5 +1,6 @@
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Globalization;
 
 namespace GameTexturePackManager
 {
@@ -24,7 +25,7 @@ namespace GameTexturePackManager
 
             GTPM_INFO = DataFileSystem.GetDataFromTXTDataFile(new FileInfo(@"GTPMAssets\GTPMInfo.txt"));
             EXTENSION_TYPES = DataFileSystem.GetDataFromTXTDataFile(new FileInfo(@"GTPMAssets\FileExtensions.txt"));
-            SettingsSystem.SetDefaultLanguage("English");
+            SettingsSystem.SetDefaultLanguage("en");
 
             if (!Directory.Exists(GAMES_FOLDER_PATH))
                 Directory.CreateDirectory(GAMES_FOLDER_PATH);
@@ -32,14 +33,17 @@ namespace GameTexturePackManager
             if (!File.Exists(SettingsSystem.SettingsFilePath))
             {
                 //Set default user settings
-                SettingsSystem.SetLanguage("English"); //Find correct language (if exists) with cultureinfo
+                SettingsSystem.SetLanguage(CultureInfo.CurrentCulture.TwoLetterISOLanguageName);
 
                 DataFileSystem.WriteDataToTXTDataFile(SettingsSystem.SettingsFilePath, SettingsSystem.GetSettingsDictionary());
             }
 
             Dictionary<string, string> settingsDict = DataFileSystem.GetDataFromTXTDataFile(new FileInfo(SettingsSystem.SettingsFilePath));
 
-            SettingsSystem.SetLanguage(settingsDict["SelectedLanguage"]);
+            if (File.Exists(@"GTPMAssets\Languages\" + settingsDict["SelectedLanguage"] + ".txt"))
+                SettingsSystem.SetLanguage(settingsDict["SelectedLanguage"]);
+            else
+                SettingsSystem.SetLanguage(File.Exists(@"GTPMAssets\Languages\" + CultureInfo.CurrentCulture.TwoLetterISOLanguageName + ".txt") ? CultureInfo.CurrentCulture.TwoLetterISOLanguageName : "en");
 
             new Program().MainAsync().GetAwaiter().GetResult();
         }
