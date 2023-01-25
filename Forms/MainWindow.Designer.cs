@@ -44,7 +44,6 @@
             // 
             // selectedGameLabel
             // 
-            this.selectedGameLabel.AutoSize = false;
             this.selectedGameLabel.Location = new System.Drawing.Point(12, 22);
             this.selectedGameLabel.Name = "selectedGameLabel";
             this.selectedGameLabel.Size = new System.Drawing.Size(109, 20);
@@ -113,6 +112,8 @@
             // 
             // OpenTexturePacksFolderButton
             // 
+            this.OpenTexturePacksFolderButton.Image = global::GameTexturePackManager.Properties.Resources.B_OpenFolder;
+            this.OpenTexturePacksFolderButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.OpenTexturePacksFolderButton.Location = new System.Drawing.Point(303, 215);
             this.OpenTexturePacksFolderButton.Name = "OpenTexturePacksFolderButton";
             this.OpenTexturePacksFolderButton.Size = new System.Drawing.Size(266, 35);
@@ -122,6 +123,8 @@
             // 
             // ConfigureGameButton
             // 
+            this.ConfigureGameButton.Image = global::GameTexturePackManager.Properties.Resources.B_SettingsIcon;
+            this.ConfigureGameButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.ConfigureGameButton.Location = new System.Drawing.Point(375, 15);
             this.ConfigureGameButton.Name = "ConfigureGameButton";
             this.ConfigureGameButton.Size = new System.Drawing.Size(194, 35);
@@ -143,6 +146,7 @@
             // ResetDefaultTexturePackButton
             // 
             this.ResetDefaultTexturePackButton.ForeColor = System.Drawing.Color.Crimson;
+            this.ResetDefaultTexturePackButton.Image = global::GameTexturePackManager.Properties.Resources.B_ResetDefaultTexturePackIcon;
             this.ResetDefaultTexturePackButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.ResetDefaultTexturePackButton.Location = new System.Drawing.Point(304, 256);
             this.ResetDefaultTexturePackButton.Name = "ResetDefaultTexturePackButton";
@@ -153,6 +157,8 @@
             // 
             // OpenSettingsButton
             // 
+            this.OpenSettingsButton.Image = global::GameTexturePackManager.Properties.Resources.B_SettingsIcon;
+            this.OpenSettingsButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.OpenSettingsButton.Location = new System.Drawing.Point(161, 296);
             this.OpenSettingsButton.Name = "OpenSettingsButton";
             this.OpenSettingsButton.Size = new System.Drawing.Size(266, 35);

@@ -63,6 +63,16 @@ namespace GameTexturePackManager.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap B_AdvancedSettingsIcon {
+            get {
+                object obj = ResourceManager.GetObject("B_AdvancedSettingsIcon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap B_ConfirmButton {
             get {
                 object obj = ResourceManager.GetObject("B_ConfirmButton", resourceCulture);
@@ -76,6 +86,16 @@ namespace GameTexturePackManager.Properties {
         internal static System.Drawing.Bitmap B_MinusButton {
             get {
                 object obj = ResourceManager.GetObject("B_MinusButton", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap B_OpenFolder {
+            get {
+                object obj = ResourceManager.GetObject("B_OpenFolder", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -106,6 +126,26 @@ namespace GameTexturePackManager.Properties {
         internal static System.Drawing.Bitmap B_ResetButton {
             get {
                 object obj = ResourceManager.GetObject("B_ResetButton", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap B_ResetDefaultTexturePackIcon {
+            get {
+                object obj = ResourceManager.GetObject("B_ResetDefaultTexturePackIcon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap B_SettingsIcon {
+            get {
+                object obj = ResourceManager.GetObject("B_SettingsIcon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
