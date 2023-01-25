@@ -1,0 +1,112 @@
+﻿ApplicationName
+Game Texture Pack Manager
+MainWindow_SelectedGameLabel
+Jeu sélectionné
+MainWindow_ConfigureGameButton
+Configurer le jeu
+MainWindow_AvailableTexturePacksLabel
+Packs de textures disponibles
+MainWindow_SelectedTexturePacksLabel
+Packs de textures sélectionnés
+MainWindow_ApplyTexturePacksButton
+Appliquer des packs de textures
+MainWindow_RefreshTexturePacksButton
+Actualiser les packs de textures
+MainWindow_OpenTexturePacksFolderButton
+Ouvrir le dossier Packs de textures
+MainWindow_ResetDefaultTexturePackButton
+RÉINITIALISER LE PACK DE TEXTURE PAR DÉFAUT
+AddGameForm_GameNameLabel
+Nom du jeu
+AddGameForm_ContentFolderPathLabel
+Chemin du dossier de contenu
+AddGameForm_SelectFolderButton
+Sélectionner le dossier
+AddGameForm_AllowedFileTypesLabel
+Types de fichiers autorisés
+AddGameForm_ConfigureGameButton
+Configurer {0}
+AddGame
+Ajouter un jeu
+NoGameSelected
+Aucun jeu sélectionné
+NoPresetGamesFound
+Aucun jeu détecté automatiquement
+AddGameQuestion
+Voulez-vous vraiment ajouter/configurer {0}?
+InvalidGameName
+Le nom du jeu ne peut pas contenir de caractères de nom de fichier non valides.
+CustomGameCreationError
+Erreur de création de jeu personnalisé
+GameDirectoryRemoved
+{0}\{1} a été supprimé.
+ContentFolderPathNotFound
+Le chemin du dossier de contenu n'existe pas! {0}
+OverwritingFilesProgress
+Remplacer {0}<br>({1}%) ({2}/{3} dossiers)
+CopyingFilesProgress
+Copier {0}<br>({1}%) ({2}/{3} dossiers)
+DefaultTexturePackException
+Une exception s'est produite lors de la création d'un pack de textures par défaut pour {0}. Le pack de textures a été supprimé. Message d'erreur : {1}
+DefaultTexturePackQuestion
+GTPM doit créer un pack de textures par défaut pour {0}. Si vous avez déjà des packs de textures, vous pouvez les supprimer avant de laisser GTPM créer un pack de textures par défaut. Cela nécessitera {1} Mo.
+DefaultTexturePack
+Pack de textures par défaut
+DefaultTexturePackSuccess
+Création d'un pack de textures par défaut pour {0}!
+DefaultTexturePackCancel
+La création du pack de textures a été annulée. Le pack de textures a été supprimé.
+DefaultTexturePackNotEnoughSpaceError
+Vous devez disposer de {0} Mo disponibles sur votre ordinateur pour ajouter ce jeu personnalisé.
+CreateDefaultTexturePack
+Créer un pack de textures par défaut
+DefaultTexturePackNotUpToDateQuestion
+Le pack de textures par défaut est obsolète. Souhaitez-vous réinitialiser le pack de textures par défaut ?<br>(Remarque : GTPM ne peut pas toujours le détecter !)
+TexturePackUpToDateSetting
+Essayez de vous tenir au courant
+UpToDateSettingNote
+Remarque : GTPM ne peut pas toujours détecter les mises à jour du jeu, veuillez rester au courant des mises à jour!
+ApplyTexturePackNotEnoughSpaceError
+Vous n'avez pas assez d'espace libre disponible pour appliquer ces packs de textures. ({0} Mo)
+TextureNotFoundException
+Texture {0} not found in any texture pack (including default)!
+ApplyTexturePackQuestion
+Texture {0} introuvable dans aucun pack de textures (y compris par défaut)!
+ApplyTexturePacks
+Appliquer des packs de textures
+ApplySuccess
+Applied texture packs to {0}!
+ApplyCancel
+Appliqué des packs de textures à {0}!
+ApplyException
+Une exception s'est produite lors de l'application des packs de textures pour {0}. Message d'erreur : {1}
+ApplyDefaultQuestion
+Souhaitez-vous appliquer uniquement le pack de textures par défaut?
+Settings_Name
+Paramètres
+Settings_Language
+Langue
+Settings_Apply
+Enregistrer les paramètres
+Settings_OpenButton
+Ouvrir les paramètres GTPM
+Settings_AskToSave
+Vous n'avez pas encore sauvé. Souhaitez-vous sauver vos paramètres?
+Settings_Saved
+Paramètres sauvegardés
+ImagesExt
+Images
+AudioExt
+L'audio
+VideosExt
+Vidéos
+3D ModelsExt
+Modèles 3D
+FontsExt
+Polices
+plistExt
+plist
+XNBExt
+XNB
+TextExt
+Texte
