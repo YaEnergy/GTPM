@@ -61,23 +61,23 @@ Vous devez disposer de {0} Mo disponibles sur votre ordinateur pour ajouter ce j
 CreateDefaultTexturePack
 Créer un pack de textures par défaut
 DefaultTexturePackNotUpToDateQuestion
-Le pack de textures par défaut est obsolète. Souhaitez-vous réinitialiser le pack de textures par défaut ?<br>(Remarque : GTPM ne peut pas toujours le détecter !)
+Le pack de textures par défaut est obsolète. Souhaitez-vous réinitialiser le pack de textures par défaut ?<br>(Remarque: GTPM ne peut pas toujours le détecter !)
 TexturePackUpToDateSetting
 Essayez de vous tenir au courant
 UpToDateSettingNote
-Remarque : GTPM ne peut pas toujours détecter les mises à jour du jeu, veuillez rester au courant des mises à jour!
+Remarque: GTPM ne peut pas toujours détecter les mises à jour du jeu, veuillez rester au courant des mises à jour!
 ApplyTexturePackNotEnoughSpaceError
 Vous n'avez pas assez d'espace libre disponible pour appliquer ces packs de textures. ({0} Mo)
 TextureNotFoundException
-Texture {0} not found in any texture pack (including default)!
-ApplyTexturePackQuestion
 Texture {0} introuvable dans aucun pack de textures (y compris par défaut)!
+ApplyTexturePackQuestion
+Voulez-vous vraiment appliquer les packs de textures sélectionnés?
 ApplyTexturePacks
 Appliquer des packs de textures
 ApplySuccess
-Applied texture packs to {0}!
-ApplyCancel
 Appliqué des packs de textures à {0}!
+ApplyCancel
+Texture Pack Apply a été annulé.
 ApplyException
 Une exception s'est produite lors de l'application des packs de textures pour {0}. Message d'erreur : {1}
 ApplyDefaultQuestion
@@ -87,7 +87,7 @@ Paramètres
 Settings_Language
 Langue
 Settings_Apply
-Enregistrer les paramètres
+Sauver les paramètres
 Settings_OpenButton
 Ouvrir les paramètres GTPM
 Settings_AskToSave

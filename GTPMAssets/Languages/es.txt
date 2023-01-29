@@ -1,0 +1,112 @@
+﻿ApplicationName
+Game Texture Pack Manager
+MainWindow_SelectedGameLabel
+Juego seleccionado
+MainWindow_ConfigureGameButton
+Configurar el juego
+MainWindow_AvailableTexturePacksLabel
+Paquetes de texturas disponibles
+MainWindow_SelectedTexturePacksLabel
+Paquetes de textura seleccionados
+MainWindow_ApplyTexturePacksButton
+Aplicar paquetes de textura
+MainWindow_RefreshTexturePacksButton
+Actualizar paquetes de texturas
+MainWindow_OpenTexturePacksFolderButton
+Abra la carpeta Paquetes de texturas
+MainWindow_ResetDefaultTexturePackButton
+RESTABLECER PAQUETE DE TEXTURAS PREDETERMINADO
+AddGameForm_GameNameLabel
+Nombre del juego
+AddGameForm_ContentFolderPathLabel
+Ruta de la carpeta de contenido
+AddGameForm_SelectFolderButton
+Seleccione la carpeta
+AddGameForm_AllowedFileTypesLabel
+Tipos de archivo permitidos
+AddGameForm_ConfigureGameButton
+Configurar {0}
+AddGame
+Agregar juego
+NoGameSelected
+Ningún juego seleccionado
+NoPresetGamesFound
+Ningún juego detectado automáticamente
+AddGameQuestion
+¿Está seguro de que desea agregar/configurar {0}?
+InvalidGameName
+El nombre del juego no puede contener caracteres de nombre de archivo no válidos.
+CustomGameCreationError
+Error de creación de juego personalizado
+GameDirectoryRemoved
+{0}\{1} ha sido eliminado.
+ContentFolderPathNotFound
+¡La ruta de la carpeta de contenido no existe! {0}
+OverwritingFilesProgress
+Reemplazar {0}<br>({1}%) ({2}/{3} archivos)
+CopyingFilesProgress
+Reemplazar {0}<br>({1}%) ({2}/{3} archivos)
+DefaultTexturePackException
+Se produjo una excepción al crear un paquete de texturas predeterminado para {0}. El paquete de texturas ha sido eliminado. Mensaje de error: {1}
+DefaultTexturePackQuestion
+GTPM necesita crear un paquete de texturas predeterminado para {0}. Si ya tiene paquetes de texturas, puede eliminarlos antes de permitir que GTPM cree un paquete de texturas predeterminado. Esto requerirá {1} MB.
+DefaultTexturePack
+Paquete de textura predeterminado
+DefaultTexturePackSuccess
+¡Se creó un paquete de texturas predeterminado para {0}!
+DefaultTexturePackCancel
+Se canceló la creación del paquete de texturas. El paquete de texturas ha sido eliminado.
+DefaultTexturePackNotEnoughSpaceError
+Debe tener {0} MB disponibles en su computadora para agregar este juego personalizado.
+CreateDefaultTexturePack
+Crear un paquete de textura predeterminado
+DefaultTexturePackNotUpToDateQuestion
+El paquete de texturas predeterminado está en desuso. ¿Te gustaría restablecer el paquete de texturas predeterminado?<br>(Nota: ¡GTPM no siempre puede detectarlo!)
+TexturePackUpToDateSetting
+Trate de mantenerse actualizado
+UpToDateSettingNote
+Nota: GTPM no siempre puede detectar actualizaciones de juegos, ¡estén atentos a las actualizaciones!
+ApplyTexturePackNotEnoughSpaceError
+No tienes suficiente espacio libre disponible para aplicar estos paquetes de texturas. ({0} MB)
+TextureNotFoundException
+¡La textura {0} no se encuentra en ningún paquete de texturas (incluido el predeterminado)!
+ApplyTexturePackQuestion
+¿Está seguro de que desea aplicar los paquetes de texturas seleccionados?
+ApplyTexturePacks
+Aplicar paquetes de textura
+ApplySuccess
+¡Paquetes de textura aplicados a {0}!
+ApplyCancel
+Se ha cancelado la aplicación del paquete de texturas.
+ApplyException
+Se produjo una excepción al aplicar paquetes de texturas para {0}. Mensaje de error: {1}
+ApplyDefaultQuestion
+¿Desea aplicar solo el paquete de textura predeterminado?
+Settings_Name
+Configuraciones
+Settings_Language
+Lengua
+Settings_Apply
+Guardar ajustes
+Settings_OpenButton
+Abrir la configuración de GTPM
+Settings_AskToSave
+Aún no has guardado. ¿Desea guardar su configuración?
+Settings_Saved
+Configuraciones guardadas
+ImagesExt
+Fotos
+AudioExt
+Audio
+VideosExt
+Vídeos
+3D ModelsExt
+Modelos 3D
+FontsExt
+Fuentes
+plistExt
+plist
+XNBExt
+XNB
+TextExt
+Texto
