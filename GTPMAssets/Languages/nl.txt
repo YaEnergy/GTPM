@@ -15,7 +15,7 @@ Vernieuw textuurpakketten
 MainWindow_OpenTexturePacksFolderButton
 Open textuurpakketten map
 MainWindow_ResetDefaultTexturePackButton
-RESET STANDAARD TEXTUURPAKKET
+RESET STANDAARD
 AddGameForm_GameNameLabel
 Spel naam
 AddGameForm_ContentFolderPathLabel

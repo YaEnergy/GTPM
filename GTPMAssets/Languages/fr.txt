@@ -15,7 +15,7 @@ Actualiser les packs de textures
 MainWindow_OpenTexturePacksFolderButton
 Ouvrir le dossier Packs de textures
 MainWindow_ResetDefaultTexturePackButton
-RÉINITIALISER LE PACK DE TEXTURE PAR DÉFAUT
+RÉINITIALISER PAR DÉFAUT
 AddGameForm_GameNameLabel
 Nom du jeu
 AddGameForm_ContentFolderPathLabel

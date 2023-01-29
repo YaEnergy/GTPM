@@ -15,7 +15,7 @@ Actualizar paquetes de texturas
 MainWindow_OpenTexturePacksFolderButton
 Abra la carpeta Paquetes de texturas
 MainWindow_ResetDefaultTexturePackButton
-RESTABLECER PAQUETE DE TEXTURAS PREDETERMINADO
+RESTABLECER PREDETERMINADO
 AddGameForm_GameNameLabel
 Nombre del juego
 AddGameForm_ContentFolderPathLabel

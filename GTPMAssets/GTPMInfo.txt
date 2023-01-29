@@ -1,4 +1,4 @@
 ﻿Version
-v1
+v2
 IconPath
 GTPMAssets\Assets\appIcon.ico

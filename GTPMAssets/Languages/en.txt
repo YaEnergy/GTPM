@@ -15,7 +15,7 @@ Refresh Texture Packs
 MainWindow_OpenTexturePacksFolderButton
 Open Texture Packs Folder
 MainWindow_ResetDefaultTexturePackButton
-RESET DEFAULT TEXTURE PACK
+RESET DEFAULT
 AddGameForm_GameNameLabel
 Game Name
 AddGameForm_ContentFolderPathLabel
