@@ -37,15 +37,15 @@
             // 
             this.LanguageComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.LanguageComboBox.FormattingEnabled = true;
-            this.LanguageComboBox.Location = new System.Drawing.Point(92, 12);
+            this.LanguageComboBox.Location = new System.Drawing.Point(12, 32);
             this.LanguageComboBox.Name = "LanguageComboBox";
-            this.LanguageComboBox.Size = new System.Drawing.Size(278, 28);
+            this.LanguageComboBox.Size = new System.Drawing.Size(358, 28);
             this.LanguageComboBox.TabIndex = 3;
             // 
             // languageLabel
             // 
             this.languageLabel.AutoSize = true;
-            this.languageLabel.Location = new System.Drawing.Point(12, 15);
+            this.languageLabel.Location = new System.Drawing.Point(12, 9);
             this.languageLabel.Name = "languageLabel";
             this.languageLabel.Size = new System.Drawing.Size(74, 20);
             this.languageLabel.TabIndex = 2;
