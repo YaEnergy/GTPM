@@ -39,7 +39,7 @@
             this.LanguageComboBox.FormattingEnabled = true;
             this.LanguageComboBox.Location = new System.Drawing.Point(12, 32);
             this.LanguageComboBox.Name = "LanguageComboBox";
-            this.LanguageComboBox.Size = new System.Drawing.Size(358, 28);
+            this.LanguageComboBox.Size = new System.Drawing.Size(278, 28);
             this.LanguageComboBox.TabIndex = 3;
             // 
             // languageLabel
@@ -59,7 +59,7 @@
             this.ApplyButton.Location = new System.Drawing.Point(12, 146);
             this.ApplyButton.Name = "ApplyButton";
             this.ApplyButton.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.ApplyButton.Size = new System.Drawing.Size(358, 35);
+            this.ApplyButton.Size = new System.Drawing.Size(278, 35);
             this.ApplyButton.TabIndex = 8;
             this.ApplyButton.Text = "Apply Settings";
             this.ApplyButton.UseVisualStyleBackColor = true;
@@ -68,12 +68,12 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(382, 193);
+            this.ClientSize = new System.Drawing.Size(302, 193);
             this.Controls.Add(this.ApplyButton);
             this.Controls.Add(this.LanguageComboBox);
             this.Controls.Add(this.languageLabel);
-            this.MaximumSize = new System.Drawing.Size(400, 240);
-            this.MinimumSize = new System.Drawing.Size(400, 240);
+            this.MaximumSize = new System.Drawing.Size(320, 240);
+            this.MinimumSize = new System.Drawing.Size(320, 240);
             this.Name = "SettingsForm";
             this.Text = "GTPM Settings";
             this.ResumeLayout(false);
