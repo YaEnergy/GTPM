@@ -1,13 +1,16 @@
-# Game Texture Pack Manager
+# Game Texture Pack Manager V2
 Manage and apply texture packs for games that have an exposed texture & audio folder in a fast and easy to use way!
 > **PLEASE make sure your default texture packs are up-to-date. You can update a default texture pack by pressing the 'Reset Default Texture Pack' button.**
+> *GTPM can also auto-detect updates for you, but this may not work all the time.*
 
 This program uses WinForms for its UI, this means that this program can only be run on Windows.
 
 ## How To Use
 After opening up the program, select the game you want to change the textures of in the dropdown next to the 'Selected Game' label. If you do not see your game there, you will have to select the 'Add Game' option.
-
 This will open up the Add Game window.
+
+If you need to, you can change your language in the settings window. Just press the Open GTPM Settings button. There are currently 4 languages: English, Dutch (Nederlands), Spanish (Español) & French (Français). 
+> Not all languages might be perfect, please report any issues that you come across.
 
 ### Adding Games
 Open up the Add Game window by going to the selected game dropdown and pressing 'Add Game'.
@@ -15,11 +18,16 @@ Open up the Add Game window by going to the selected game dropdown and pressing 
 Here you can give a name to the game you want to add, or select one of the preset options by clicking on the down arrow near the textbox and selecting one of the options. However, those games will only show up, if the program could find their resource/content folders.
 
 You cannot type in the content folder path textbox, but by pressing the button next to it, you can select a content/resource folder to manage. 
-> Please note that this folder should only contain files and folders for files like images, sounds, ... . It should not contain the .exe file for the game itself or other very important files.
+> Note: This folder should only contain files and folders for files like images, sounds, ... . It should not contain the .exe file for the game itself or other very important files.
 > For example: the Geometry Dash Preset sets the content folder path not to C:\Program Files (x86)\Steam\steamapps\common\Geometry Dash, but to C:\Program Files (x86)\Steam\steamapps\common\Geometry Dash\Resources.
 
 In the 'Allowed File Extensions' checklist, you can select which file types (like images, audio, ...) you want to manage. 
 > Note: You cannot add custom file types within the program. This is done for safety reasons. However, you can edit the FileExtensions.txt file in the GTPMAssets folder if you really need to add a custom file type or extension.
+
+If Try to keep up-to-date checkbox is checked, GTPM will try to auto-detect game updates and reset the default texture pack, just before you apply any texture packs.
+> Note 1: GTPM cannot always detect game updates, there is still an option to do it manually if GTPM can't detect it.
+
+> Note 2: If GTPM has to update the default texture pack, this might cause your texture packs to no longer work as intended. You will have to get new or update your other texture packs.
 
 To add the game to the list, just press the 'Add Game' button. GTPM will ask you if you want to let it create a default texture pack, this is required if you want to manage texture packs.
 
@@ -50,7 +58,11 @@ If a selected game does not have a default texture pack, it will ask to create o
 
 ## Notes
 
-> PLEASE make sure your default texture packs are up-to-date. You can update a default texture pack by pressing the 'Reset Default Texture Pack' button.
+> PLEASE make sure your default texture packs are up-to-date. You can update a default texture pack by pressing the 'Reset Default Texture Pack' button. GTPM can also detect game updates, but this might not always work.
+
+> GTPM cannot always detect game updates, there is still an option to do it manually if GTPM can't detect it.
+
+> If GTPM has to update the default texture pack, this might cause your texture packs to no longer work as intended. You will have to get new or update your other texture packs.
 
 > The selected content/resource folder for a game should only contain files and folders for files like images, sounds, ... . It should not contain the .exe file for the game itself or other very important files.
 > For example: the Geometry Dash Preset sets the content folder path not to C:\Program Files (x86)\Steam\steamapps\common\Geometry Dash, but to C:\Program Files (x86)\Steam\steamapps\common\Geometry Dash\Resources.
@@ -60,5 +72,7 @@ If a selected game does not have a default texture pack, it will ask to create o
 > The lowest selected texture pack in the list, has the highest priority.
 
 > The Default Texture Pack cannot be removed from the selected list.
+
+> Not all languages might be perfect, please report any issues that you come across.
 
 > This program uses WinForms for its UI, this means that this program can only be run on Windows.
