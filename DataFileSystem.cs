@@ -44,7 +44,7 @@ namespace GameTexturePackManager
         {
             try
             {
-                FileStream fsToOverwrite = File.Open(fileToOverwrite.FullName, FileMode.Open, FileAccess.ReadWrite);
+                FileStream fsToOverwrite = File.Create(fileToOverwrite.FullName);
                 FileStream fsOverwriteWith = File.Open(fileOverwriteWith.FullName, FileMode.Open, FileAccess.ReadWrite);
                 fsOverwriteWith.CopyTo(fsToOverwrite);
                 fsToOverwrite.Close();
